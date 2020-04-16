@@ -1,0 +1,10 @@
+404 Not Found
+Content-Length: 413
+Etag: "5a82e077-19d"
+Strict-Transport-Security: max-age=15768000 max-age=15768000
+Retry-Count: 0
+Date: Thu, 16 Apr 2020 08:09:32 GMT
+Content-Type: text/html
+X-Frontend: front508113
+Access-Control-Expose-Headers: X-Frontend
+Server: VK

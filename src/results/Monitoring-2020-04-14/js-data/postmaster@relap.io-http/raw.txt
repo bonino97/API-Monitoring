@@ -1,0 +1,2 @@
+Usage: python /home/tools/tools/LinkFinder/linkfinder.py [Options] use -h for help
+Error: invalid input defined or SSL error: <urlopen error [Errno -2] Name or service not known>

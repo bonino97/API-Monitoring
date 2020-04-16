@@ -1,0 +1,10 @@
+403 Forbidden
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+Date: Thu, 16 Apr 2020 08:10:09 GMT
+Retry-Count: 0
+X-Frontend: cache34-1
+Access-Control-Expose-Headers: X-Frontend
+Server: VK
+Content-Type: text/html
+Content-Length: 143

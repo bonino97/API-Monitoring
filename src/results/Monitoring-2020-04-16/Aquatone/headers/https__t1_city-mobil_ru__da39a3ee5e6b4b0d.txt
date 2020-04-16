@@ -1,0 +1,12 @@
+200 OK
+Content-Type: text/html; charset=UTF-8
+P3p: policyref="/bitrix/p3p.xml", CP="NON DSP COR CUR ADM DEV PSA PSD OUR UNR BUS UNI COM NAV INT DEM STA"
+X-Frame-Options: SAMEORIGIN
+Expires: Thu, 16 Apr 2020 08:10:14 GMT
+Cache-Control: no-cache
+Date: Thu, 16 Apr 2020 08:10:15 GMT
+Set-Cookie: CURRENT_CITY=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0; expires=Sat, 16-May-2020 08:10:15 GMT; Max-Age=2592000; path=/ PHPSESSID=1htre6f2m502oftc0ielkcrcl1; path=/; HttpOnly
+Pragma: no-cache
+Server: nginx
+Retry-Count: 0
+X-Powered-Cms: Bitrix Site Manager (c8aa05ec27d4999363a0a78c354bdf9b)

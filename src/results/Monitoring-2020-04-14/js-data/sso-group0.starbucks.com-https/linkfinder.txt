@@ -1,0 +1,5 @@
+application/x-f5-host-plugin
+/public/download/java_launcher/
+/public/download/urhostplg.crx
+/public/download/urhostplg.xpi
+/public/download/urhostplg.zip

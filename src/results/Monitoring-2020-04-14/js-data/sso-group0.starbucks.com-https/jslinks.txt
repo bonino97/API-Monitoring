@@ -1,0 +1,2 @@
+https://sso-group0.starbucks.com/public/include/js/common.js
+https://sso-group0.starbucks.com/public/include/js/u_plugin.js

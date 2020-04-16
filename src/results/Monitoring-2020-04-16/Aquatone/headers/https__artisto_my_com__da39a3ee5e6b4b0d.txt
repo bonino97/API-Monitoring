@@ -1,0 +1,11 @@
+200 OK
+Date: Thu, 16 Apr 2020 08:08:50 GMT
+Retry-Count: 0
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block; report=https://cspreport.mail.ru/xxssprotection
+Strict-Transport-Security: max-age=16070400; includeSubDomains; preload
+Server: nginx/1.14.2
+Content-Type: text/html
+X-Host: promf2.m.smailru.net
+X-Etime: 0.000
+X-Content-Type-Options: nosniff

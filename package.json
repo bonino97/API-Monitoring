@@ -1,0 +1,22 @@
+{
+  "name": "api-monitoring",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "express": "^4.17.1",
+    "forEachAsync": "^3.0.0",
+    "pg": "^8.0.0",
+    "sequelize": "^5.21.6",
+    "shelljs": "^0.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

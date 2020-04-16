@@ -1,0 +1,13 @@
+200 OK
+Expires: Sun, 26 Apr 2020 08:09:50 GMT
+Cache-Control: max-age=864000
+X-Icon_type: other
+X-Content-Type-Options: nosniff
+Server: nginx/
+Last-Modified: Thu, 09 Jun 2016 11:04:36 GMT
+X-Cn-Id: 394281303
+X-Icon_source: #
+Retry-Count: 0
+Date: Thu, 16 Apr 2020 08:09:50 GMT
+Content-Type: image/png
+Content-Length: 2061

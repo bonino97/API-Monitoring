@@ -1,0 +1,8 @@
+200 OK
+Content-Type: text/html; charset=UTF-8
+Retry-Count: 0
+Server-Timing: intid;desc=bb2efc10a703ca6c
+Cache-Control: no-cache, private
+Date: Thu, 16 Apr 2020 08:09:42 GMT
+Set-Cookie: laravel_session=eyJpdiI6IkNpT2s4U0dQa2xZTWx6bWVhZE11akE9PSIsInZhbHVlIjoiTHRtQ203dnR3QjVRUnJzOUpIUmk5Y0RZT3JoWHVxMlhRZ1JVU2FnS2ppMlBvNmpZOFZRZlVjRHlhTldNN3FCWHNGNThYRHRoWXpSME84Y0lKbUIzWmc9PSIsIm1hYyI6IjU3NDExZmQzNzNiMTY1YmJkYjA1MzE3Y2ZmNTg3MzdkODA0OGEzMjhkMjIwZTIwMDY1NjBlNzhhMGNlNjU0NGMifQ%3D%3D; expires=Thu, 16-Apr-2020 10:09:42 GMT; Max-Age=7200; path=/; httponly
+Server: nginx/1.10.3

@@ -1,0 +1,9 @@
+200 OK
+X-Xss-Protection: 1; mode=block; report=https://cspreport.mail.ru/xxssprotection
+Date: Thu, 16 Apr 2020 08:09:38 GMT
+X-Content-Type-Options: nosniff
+Retry-Count: 0
+Set-Cookie: unique=UTlPWru7; expires=Sun, 14 Apr 2030 08:09:38 GMT; domain=relap.io; path=/; secure; HttpOnly; SameSite=None fsts=1587024578; expires=Sun, 14 Apr 2030 08:09:38 GMT; domain=relap.io; path=/; secure; HttpOnly; SameSite=None lsts=1587024578; expires=Sun, 14 Apr 2030 08:09:38 GMT; domain=relap.io; path=/; secure; HttpOnly; SameSite=None suid=0f01f078efba6ed42a6824feef6c7773424ec8fb--0d230cedd6f0c3a9015b83ad6427086c121c9582; domain=relap.io; path=/; secure; HttpOnly; SameSite=None hllc=1; expires=Fri, 17 Apr 2020 08:09:38 GMT; domain=relap.io; path=/; secure; HttpOnly; SameSite=None
+Strict-Transport-Security: max-age=5184000; includeSubdomains;
+Server: nginx
+Content-Type: text/html;charset=UTF-8

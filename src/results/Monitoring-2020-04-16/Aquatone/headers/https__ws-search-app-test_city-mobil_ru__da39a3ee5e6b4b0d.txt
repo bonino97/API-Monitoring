@@ -1,0 +1,7 @@
+200 OK
+Server: nginx
+Date: Thu, 16 Apr 2020 08:10:13 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 15
+Retry-Count: 0
+Access-Control-Allow-Headers: Access-Control-Allow-Origin, Access-Control-Allow-Methods, Access-Control-Allow-Headers, CM-App-Os-Name, CM-App-Os-Version, CM-App-Version, CM-App-Os-Version, CM-Device, CM-User-Id, CM-Auth-Token, CM-Session

@@ -1,0 +1,13 @@
+403 Forbidden
+X-Content-Type-Options: nosniff
+Retry-Count: 0
+Cachecontrolheader: max-age=604800
+X-Powered-By: ASP.NET
+Content-Length: 1233
+X-Xss-Protection: 1; mode=block
+Content-Security-Policy: default-src 'self' blob: https: data: 'unsafe-inline' 'unsafe-eval';
+Content-Type: text/html
+Set-Cookie: NSC_YXFC-13-TTM=ffffffffc3a0d71c45525d5f4f58455e445a4a423660;path=/;secure;httponly
+Date: Thu, 16 Apr 2020 08:09:55 GMT
+Server-Timing: cdn-cache; desc=MISS edge; dur=440 origin; dur=439
+Strict-Transport-Security: max-age=86400

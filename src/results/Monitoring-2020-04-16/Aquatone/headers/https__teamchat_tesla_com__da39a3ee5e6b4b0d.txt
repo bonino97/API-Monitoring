@@ -1,0 +1,17 @@
+200 OK
+Content-Security-Policy: frame-ancestors 'self'; script-src 'self' cdn.segment.com/analytics.js/
+X-Ratelimit-Remaining: 6000
+Last-Modified: Thu, 09 Apr 2020 21:12:49 GMT
+Vary: Accept-Encoding
+Retry-Count: 0
+X-Ratelimit-Limit: 6001
+X-Ratelimit-Reset: 1
+Connection: Keep-Alive
+Accept-Ranges: bytes
+Cache-Control: no-cache, max-age=31556926, public
+X-Frame-Options: SAMEORIGIN
+Date: Thu, 16 Apr 2020 08:10:17 GMT
+Set-Cookie: BIGipServerteamchat-http-pool=!mShJYZka//sFCzJwx7z99gYGIcAIo7wt6Jat2UQRUXZv6kBmyK5qb1121bcsLtmAMSl0qKII0xJ21sc=; path=/
+Content-Type: text/html; charset=utf-8
+X-Request-Id: 9a1n8zb33jrb3dya668szpqggo
+X-Version-Id: 5.21.0.5.21.0.04130d6830488317244f2b9b99c904c3.true

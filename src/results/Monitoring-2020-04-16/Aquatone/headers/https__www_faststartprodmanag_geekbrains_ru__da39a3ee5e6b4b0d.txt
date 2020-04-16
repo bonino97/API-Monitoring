@@ -1,0 +1,19 @@
+200 OK
+Content-Length: 194149
+Last-Modified: Mon, 13 Apr 2020 07:23:11 GMT
+Etag: "2f665-5a326f49e6e96"
+P3p: policyref="/w3c/p3p.xml", CP="CUR ADM OUR NOR STA NID"
+X-Variti-Ccr: 740937562:26
+Content-Type: text/html; charset=UTF-8
+Keep-Alive: timeout=15
+X-Frame-Options: SAMEORIGIN
+Cache-Control: max-age=0 public
+Accept-Ranges: bytes
+X-Scheme: https
+Retry-Count: 0
+X-Host: www.faststartprodmanag.geekbrains.ru
+Set-Cookie: rerf=AAAAAF6YEuhJkTm1AxpOAg==; expires=Sat, 16-May-20 08:10:16 GMT; path=/ ipp_uid2=Jwbt4mvXqK0wRek0/PU2onM9JNWmvhy/ResXeVg==; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/ ipp_uid1=1587024616500; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/ ipp_uid=1587024616500/Jwbt4mvXqK0wRek0/PU2onM9JNWmvhy/ResXeVg==; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/
+Server: nginx
+Date: Thu, 16 Apr 2020 08:10:16 GMT
+Connection: keep-alive
+Vary: Accept-Encoding

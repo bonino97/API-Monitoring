@@ -1,0 +1,12 @@
+docs/static
+text/xml
+text/plain
+text/html
+application/x-www-form-urlencoded
+/_csrf
+http://www.w3.org/2000/svg
+text/css
+application/x-shockwave-flash
+docs/static
+Usage: python /home/tools/tools/LinkFinder/linkfinder.py [Options] use -h for help
+Error: invalid input defined or SSL error: <urlopen error [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:852)>
