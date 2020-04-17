@@ -1,11 +1,11 @@
 403 Forbidden
-Date: Thu, 16 Apr 2020 08:09:55 GMT
 Retry-Count: 0
 X-Frontend: front212508
+Access-Control-Expose-Headers: X-Frontend
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: GET, HEAD, OPTIONS
 Server: VK
+Date: Thu, 16 Apr 2020 22:09:43 GMT
 Content-Type: text/html
 Content-Length: 545
-Access-Control-Expose-Headers: X-Frontend
 Strict-Transport-Security: max-age=15768000

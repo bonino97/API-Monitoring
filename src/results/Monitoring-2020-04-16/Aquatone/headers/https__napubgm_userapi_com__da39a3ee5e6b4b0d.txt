@@ -1,10 +1,10 @@
 404 Not Found
-Date: Thu, 16 Apr 2020 08:09:54 GMT
+Server: VK
+Date: Thu, 16 Apr 2020 22:08:14 GMT
+Content-Length: 408
+Etag: "5e98c36f-198"
+X-Frontend: front632904
+Access-Control-Expose-Headers: X-Frontend
 Content-Type: text/html
 Retry-Count: 0
-Access-Control-Expose-Headers: X-Frontend
 Strict-Transport-Security: max-age=15768000
-Server: VK
-Etag: "5e97fe2e-198"
-X-Frontend: front212408
-Content-Length: 408

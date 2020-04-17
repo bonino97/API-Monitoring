@@ -215,7 +215,17 @@ const getSubdomains = async (req,res) => {
         }
 
         if(aquatoneExecuted){
+            var dataConsExecuted = await executeDataConsumer(todayDir)  
+                                            .then(data => {
+                                                return data
+                                            })
+                                            .catch(err => {
+                                                console.log("API Break when executes DataConsumer: ", err);   
+                                            });
+        }
 
+        if(dataConsExecuted){
+            
         }
 
         res.status(200).json({
@@ -418,6 +428,88 @@ async function executeAquatone(todayDir){
     catch(err){
         return err;
     }
+}
+
+async function executeDataConsumer(todayDir){
+
+    var path = `${todayDir}/Aquatone/aquatone_session.json`;
+
+    
+    const aquatoneJson = fs.readFileSync(path, 'utf8');
+    
+
+    const jsonParsed = JSON.parse(aquatoneJson);
+    const jsonPages = jsonParsed['pages']
+    const jsonPagesKeys = Object.keys(jsonPages)
+
+    jsonPagesKeys.forEach(async (elem, index) => {
+
+        try {
+
+            let jsonResult = jsonPages[elem];
+            let jsonAddress = jsonResult.addrs;
+            let jsonHeaders = jsonResult.headers;
+            let jsonStacks = jsonResult.tags;
+
+            //let jsonAddressKeys = Object.keys(jsonAddrs)
+            let url = jsonResult.url;
+            let status = jsonResult.status.slice(0,3).trim();
+        
+            let existByLikeSearch = await Subdomains.findOne({ where: {url: {[Op.like]: `%${url}%`}}})
+            
+            if( existByLikeSearch == null ){
+
+                let existByEqualSearch = await Subdomains.findOne({ where: { url : url }})
+                
+                if( existByEqualSearch == null ){
+                    let subdomain = Subdomains.create({
+                        url: url,
+                        statusCode: status
+                    }).then( (subData) =>{
+                        jsonAddress.forEach(address => {
+
+                            let information = Information.create({
+                                address: address,
+                                subdomainId: subData.id
+                            });
+
+                        });
+
+                        jsonHeaders.forEach(headerData => {
+
+                            let header = Headers.create({
+                                name: headerData.name,
+                                value: headerData.value,
+                                subdomainId: subData.id
+                            });
+
+                        });
+
+                        if(jsonStacks !== null){
+                            jsonStacks.forEach(stackData => {
+                                
+                                let stack = Stacks.create({
+                                    stackName: stackData.text,
+                                    subdomainId: subData.id
+                                });
+
+                            });
+                        }
+
+                    });
+                    
+                }
+            }
+
+            return true;
+            
+        }
+        catch(err){
+            return err;
+        }
+        
+    })
+
 }
 
 

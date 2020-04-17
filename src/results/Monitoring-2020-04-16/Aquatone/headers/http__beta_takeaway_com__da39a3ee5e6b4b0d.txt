@@ -1,10 +1,10 @@
 200 OK
-Content-Type: text/html
-Cf-Ray: 584c6c708a98d7d9-EZE
 Vary: Accept-Encoding
-Server: cloudflare
-Cf-Request-Id: 0223a21a510000d7d91b1db200000001
-Date: Thu, 16 Apr 2020 08:09:20 GMT
 Retry-Count: 0
-Set-Cookie: __cfduid=d8c63a887d15671422f8838e4e0deab3c1587024560; expires=Sat, 16-May-20 08:09:20 GMT; path=/; domain=.takeaway.com; HttpOnly; SameSite=Lax
+Cf-Request-Id: 0226a8ef26000074fbb5b35200000001
+Date: Thu, 16 Apr 2020 22:15:40 GMT
+Content-Type: text/html
+Cf-Ray: 5851442b787974fb-EZE
 Cache-Control: no-cache
+Server: cloudflare
+Set-Cookie: __cfduid=d342d62c7ba08abd8351d0f03a2c04a461587075340; expires=Sat, 16-May-20 22:15:40 GMT; path=/; domain=.takeaway.com; HttpOnly; SameSite=Lax

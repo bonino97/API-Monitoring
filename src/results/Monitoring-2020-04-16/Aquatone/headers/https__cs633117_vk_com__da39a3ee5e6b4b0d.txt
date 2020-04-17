@@ -1,13 +1,13 @@
 200 OK
-X-Powered-By: PHP/3.24023
+Content-Security-Policy: default-src * data: blob: about:;script-src 'self' https://*.vk.com https://static.vk.me https://*.mail.ru https://s.ytimg.com https://platform.twitter.com https://cdn.syndication.twimg.com https://www.instagram.com https://connect.facebook.net https://telegram.org https://*.yandex.ru https://*.google-analytics.com https://*.youtube.com https://maps.googleapis.com https://translate.googleapis.com https://*.google.com https://google.com https://*.vkpartner.ru https://*.moatads.com https://*.adlooxtracking.com https://*.gstatic.com https://*.google.ru https://securepubads.g.doubleclick.net https://cdn.ampproject.org https://www.googletagmanager.com https://googletagmanager.com https://*.vk-cdn.net https://*.hit.gemius.pl https://yastatic.net 'unsafe-inline' 'unsafe-eval' blob:;style-src https://vk.com https://*.vk.com https://static.vk.me https://ton.twimg.com https://tagmanager.google.com https://platform.twitter.com https://*.googleapis.com 'self' 'unsafe-inline';report-uri /csp
+Access-Control-Expose-Headers: X-Frontend
 Server: VK
 Retry-Count: 0
-Set-Cookie: remixlang=4; expires=Tue, 20 Apr 2021 00:58:31 GMT; path=/; domain=.vk.com remixbdr=0; expires=Fri, 17 Apr 2020 08:09:33 GMT; path=/; domain=.vk.com; secure remixlhk=7b45e66a6ba958ab63; expires=Sun, 18 Apr 2021 17:01:41 GMT; path=/; domain=.vk.com; secure remixstid=2092966778_CdXptUm4RzxJ1JNwMLA8Ur5GkTGNdIw3FmaZ5KHB8RL; expires=Sun, 11 Apr 2021 11:49:08 GMT; path=/; domain=.vk.com; secure remixlhk=290d0fa5f485aa12a5; expires=Tue, 13 Apr 2021 10:41:09 GMT; path=/; domain=.vk.com; secure
-Cache-Control: no-store
-Content-Type: text/html; charset=windows-1251
-Content-Security-Policy: default-src * data: blob: about:;script-src 'self' https://*.vk.com https://static.vk.me https://*.mail.ru https://s.ytimg.com https://platform.twitter.com https://cdn.syndication.twimg.com https://www.instagram.com https://connect.facebook.net https://telegram.org https://*.yandex.ru https://*.google-analytics.com https://*.youtube.com https://maps.googleapis.com https://translate.googleapis.com https://*.google.com https://google.com https://*.vkpartner.ru https://*.moatads.com https://*.adlooxtracking.com https://*.gstatic.com https://*.google.ru https://securepubads.g.doubleclick.net https://cdn.ampproject.org https://www.googletagmanager.com https://googletagmanager.com https://*.vk-cdn.net https://*.hit.gemius.pl https://yastatic.net 'unsafe-inline' 'unsafe-eval' blob:;style-src https://vk.com https://*.vk.com https://static.vk.me https://ton.twimg.com https://tagmanager.google.com https://platform.twitter.com https://*.googleapis.com 'self' 'unsafe-inline'
 X-Frame-Options: deny
+Cache-Control: no-store
+X-Frontend: front605107
 Strict-Transport-Security: max-age=15768000
-Date: Thu, 16 Apr 2020 08:09:33 GMT
-X-Frontend: front609304
-Access-Control-Expose-Headers: X-Frontend
+Content-Type: text/html; charset=windows-1251
+X-Powered-By: PHP/3.24037
+Set-Cookie: remixlang=4; expires=Wed, 07 Apr 2021 20:05:40 GMT; path=/; domain=.vk.com remixbdr=0; expires=Fri, 17 Apr 2020 22:10:24 GMT; path=/; domain=.vk.com; secure remixlhk=2dca77b79be92615ad; expires=Sat, 24 Apr 2021 05:30:23 GMT; path=/; domain=.vk.com; secure remixstid=1091916739_EmMwhgDV3nI7lww5PirgbzgNPlE3nVZ5uQoHqXlBdZ4; expires=Sat, 24 Apr 2021 06:09:11 GMT; path=/; domain=.vk.com; secure remixlhk=bc4276f7d442ae3731; expires=Thu, 08 Apr 2021 06:39:42 GMT; path=/; domain=.vk.com; secure
+Date: Thu, 16 Apr 2020 22:10:24 GMT

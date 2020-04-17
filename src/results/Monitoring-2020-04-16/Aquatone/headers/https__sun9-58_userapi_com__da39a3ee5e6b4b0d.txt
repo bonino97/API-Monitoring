@@ -1,11 +1,11 @@
 403 Forbidden
 Server: VK
+Date: Thu, 16 Apr 2020 22:10:49 GMT
 Content-Type: text/html
-Strict-Transport-Security: max-age=15768000
 Access-Control-Allow-Origin: *
-Retry-Count: 0
-Date: Thu, 16 Apr 2020 08:10:13 GMT
+Access-Control-Allow-Methods: GET, HEAD, OPTIONS
 Content-Length: 545
+Retry-Count: 0
 X-Frontend: front632911
 Access-Control-Expose-Headers: X-Frontend
-Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+Strict-Transport-Security: max-age=15768000

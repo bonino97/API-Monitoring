@@ -1,19 +1,18 @@
 200 OK
-Last-Modified: Tue, 14 Apr 2020 15:09:13 GMT
-Cache-Control: max-age=0 public
-Retry-Count: 0
-Server: nginx
-Date: Thu, 16 Apr 2020 08:10:00 GMT
-Keep-Alive: timeout=15
-Vary: Accept-Encoding
-Accept-Ranges: bytes
-Set-Cookie: rerf=AAAAAF6YEth/cF0qAx29Ag==; expires=Sat, 16-May-20 08:10:00 GMT; path=/ ipp_uid2=PbgKEXCGHn4fWUUA/kXeeOeE+VPwemC5v3rNxYw==; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/ ipp_uid1=1587024600552; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/ ipp_uid=1587024600552/PbgKEXCGHn4fWUUA/kXeeOeE+VPwemC5v3rNxYw==; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/
+P3p: policyref="/w3c/p3p.xml", CP="CUR ADM OUR NOR STA NID"
 Content-Type: text/html; charset=UTF-8
 Connection: keep-alive
-X-Host: prodmanagement.geekbrains.ru
-X-Scheme: https
-X-Variti-Ccr: 738489238:5
-P3p: policyref="/w3c/p3p.xml", CP="CUR ADM OUR NOR STA NID"
-Etag: "40a30-5a341952022b1"
+Etag: "40a3c-5a367c48d8a47"
+Set-Cookie: rerf=AAAAAF6Y19uR2HIoAw5fAg==; expires=Sat, 16-May-20 22:10:35 GMT; path=/ ipp_uid2=rp1iFUQejXnOXrfT/5AomKm4IVUvVmHiGJKU7vA==; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/ ipp_uid1=1587075035473; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/ ipp_uid=1587075035473/rp1iFUQejXnOXrfT/5AomKm4IVUvVmHiGJKU7vA==; expires=Tue, 31 Dec 2030 23:59:59 GMT; path=/
+Accept-Ranges: bytes
 X-Frame-Options: SAMEORIGIN
-Content-Length: 264752
+Cache-Control: max-age=0 public
+X-Variti-Ccr: 749703663:72
+Retry-Count: 0
+Date: Thu, 16 Apr 2020 22:10:35 GMT
+Content-Length: 264764
+Vary: Accept-Encoding
+Last-Modified: Thu, 16 Apr 2020 12:42:38 GMT
+Server: nginx
+Keep-Alive: timeout=15
+X-Host: prodmanagement.geekbrains.ru

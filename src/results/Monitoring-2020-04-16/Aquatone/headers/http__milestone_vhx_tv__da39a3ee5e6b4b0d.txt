@@ -1,17 +1,18 @@
 200 OK
-X-Ua-Compatible: IE=Edge,chrome=1
+Cache-Control: max-age=0, private, must-revalidate
 Content-Type: text/html; charset=utf-8
+Set-Cookie: vuid=1095034402.1716196282; path=/; expires=Fri, 16-Apr-2021 22:15:38 GMT _session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJWE1ODdmZDU5MWEyNGVmZjZiZjcyOTE0YzhmZDRlYzJhBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMUJCdWVaeG13cWhlUnU0WnRhUDEyQWNlSmFTV3JIQzdkZWFldlBSRHJjTTA9BjsARg%3D%3D--6e1ae870ca70d0dadc0055476b2a10ccb7e08b4f; domain=.vhx.tv; path=/; expires=Fri, 16-Apr-2021 22:15:38 GMT; secure; HttpOnly
 Vary: Accept-Encoding
-X-Runtime: 0.111800
-Retry-Count: 0
 X-Powered-By: Phusion Passenger
 X-Rack-Cache: miss
-X-Request-Id: 6a1ef5d8-f9fb-4faa-9c7c-ee0fbe28a19a
+X-Request-Id: e6885570-07e9-462c-b055-c4f2d2fa4d98
+Date: Thu, 16 Apr 2020 22:15:38 GMT
+P3p: CP="ALL DSP COR CURa ADMa DEVa OUR IND COM NAV"
+Retry-Count: 0
+Etag: "64380b9d0798a0da427cb974a38cb408"
 Server: nginx + Phusion Passenger
-Status: 200 OK
-Via: 1.1 vegur
-Date: Thu, 16 Apr 2020 08:09:20 GMT
-Etag: "ba094161fbc084bd1ccfbeee942d1906"
-Set-Cookie: vuid=1275093353.1236786781; path=/; expires=Fri, 16-Apr-2021 08:09:20 GMT _session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJWQwMzRmMDRjODExNjE5ZGUyNmQ2Y2E1YTNiMTQyMDk2BjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMXBnS2trOWE5QWxWV0YyMzA1aEhoOXlQdHY3MEhZTEJ2dHorK2tRNjkzU289BjsARg%3D%3D--a9eabc8d63eff57aba87533c7ca61fb0030650b5; domain=.vhx.tv; path=/; expires=Fri, 16-Apr-2021 08:09:20 GMT; secure; HttpOnly
 X-Frame-Options: SAMEORIGIN
-Cache-Control: max-age=0, private, must-revalidate
+X-Runtime: 0.131010
+X-Ua-Compatible: IE=Edge,chrome=1
+Via: 1.1 vegur
+Status: 200 OK

@@ -1,10 +1,10 @@
 404 Not Found
-Access-Control-Expose-Headers: X-Frontend
-Strict-Transport-Security: max-age=15768000
-Retry-Count: 0
-Server: VK
-Date: Thu, 16 Apr 2020 08:09:21 GMT
 Content-Type: text/html
-Etag: "5e97fe2e-198"
-X-Frontend: front632914
+Retry-Count: 0
+Etag: "5e98c36f-198"
+X-Frontend: front632904
+Strict-Transport-Security: max-age=15768000
+Server: VK
+Date: Thu, 16 Apr 2020 22:15:33 GMT
 Content-Length: 408
+Access-Control-Expose-Headers: X-Frontend

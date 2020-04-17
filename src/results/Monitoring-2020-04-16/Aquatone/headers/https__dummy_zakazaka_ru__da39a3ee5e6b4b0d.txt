@@ -1,13 +1,13 @@
 200 OK
-Date: Thu, 16 Apr 2020 08:09:39 GMT
-X-Powered-By: PHP/7.0.31
-Server: nginx
-Vary: Accept-Encoding
-X-Frame-Options: sameorigin
-X-Session-Fingerprint: 56790eba6e8e4c13577846d028ad3df3
 Content-Type: text/html; charset=UTF-8
-Set-Cookie: zakaSession=c2485c4d99009f5c95ee1d245354cc40; expires=Wed, 11-Jan-2023 08:09:39 GMT; Max-Age=86400000; path=/ x-csrf-token=MTU4NzAyNDU3OWQwZGU0NWRlMzY3MTlkYWVjYjUxMGJkMDI5ODJmM2JlNDg1NmQ2MDdkQUptTW5Ed0ZzSTA5M0lWYnJhOHp1SFhOUklDMkdGZg%3D%3D; expires=Thu, 16-Apr-2020 08:14:39 GMT; Max-Age=300; path=/ zakaCity=102; expires=Wed, 11-Jan-2023 08:09:39 GMT; Max-Age=86400000; path=/; domain=.zakazaka.ru zakaSession=CrIMA16YEsNtdSGRA1K8AgZ=; expires=Wed, 11-Jan-23 08:09:39 GMT; path=/
+Set-Cookie: zakaSession=01d7e3f4324df40cf3ce458cf20a51a2; expires=Wed, 11-Jan-2023 22:10:13 GMT; Max-Age=86400000; path=/ x-csrf-token=MTU4NzA3NTAxMzI1ZGVkMDM1MDk5Nzc5ZmUzNWZjMjNiZmFjZDY3YzM3NzU5ZDVkMjJvTW5xN3E4dlNDSm1xOUZZcE5QdGlvYnF3TkRLWkdteg%3D%3D; expires=Thu, 16-Apr-2020 22:15:13 GMT; Max-Age=300; path=/ zakaCity=102; expires=Wed, 11-Jan-2023 22:10:13 GMT; Max-Age=86400000; path=/; domain=.zakazaka.ru zakaSession=CrIMA16Y18VtpyGQA3TrAgZ=; expires=Wed, 11-Jan-23 22:10:13 GMT; path=/
 Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-Pragma: no-cache
+Date: Thu, 16 Apr 2020 22:10:13 GMT
 Retry-Count: 0
 Public-Key-Pins: pin-sha256="EBq+8i9/31VWIma5UZyYsasoHkCBrjrs2PLZJz65jfY=";max-age=1512000
+Server: nginx
+Vary: Accept-Encoding
+X-Powered-By: PHP/7.0.31
+Pragma: no-cache
+X-Frame-Options: sameorigin
+X-Session-Fingerprint: f931ab7e9dcd13e4465d56dd2f19795c

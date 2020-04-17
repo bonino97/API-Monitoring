@@ -1,12 +1,12 @@
 200 OK
-Server: nginx/1.12.2
+Date: Thu, 16 Apr 2020 22:10:26 GMT
+Last-Modified: Thu, 16 Apr 2020 22:10:26 GMT
+Strict-Transport-Security: max-age=3600
+Server: nginx/1.17.8
 Expires: Mon, 26 Jul 1997 05:00:00 GMT
-Last-Modified: Thu, 16 Apr 2020 08:09:52 GMT
 Cache-Control: no-store, no-cache, must-revalidate post-check=0, pre-check=0
-Set-Cookie: lang_id=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/ lang_id=ru; expires=Wed, 06-Apr-2022 08:09:52 GMT; Max-Age=62208000; path=/ MRGS_target=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/ MRGS_target=Lw%3D%3D; expires=Thu, 16-Apr-2020 08:19:52 GMT; Max-Age=600; path=/
+Set-Cookie: lang_id=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/ lang_id=ru; expires=Wed, 06-Apr-2022 22:10:26 GMT; Max-Age=62208000; path=/ MRGS_target=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/ MRGS_target=Lw%3D%3D; expires=Thu, 16-Apr-2020 22:20:26 GMT; Max-Age=600; path=/
 Retry-Count: 0
 Content-Type: text/html;charset=UTF-8
 Serverapache: backend-5
-Strict-Transport-Security: max-age=3600
-Date: Thu, 16 Apr 2020 08:09:52 GMT
 Pragma: no-cache
