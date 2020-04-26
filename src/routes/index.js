@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const router = Router();
-const indexController = require('../controllers/index.controller');
+const indexController = require('../controllers/indexController');
 
-router.get('/subdomains', indexController.getSubdomains);
+router.post('/Findomain', indexController.FindomainMonitoring);
+router.get('/Findomain', indexController.FindomainSubdomains);
 
-router.get('/all', indexController.getAllSubdomains);
+router.get('/Enumeration', indexController.SubdomainEnumeration);
+router.get('/Monitoring', indexController.ExecuteMonitoring);
 
 router.get('/test', indexController.test);
 

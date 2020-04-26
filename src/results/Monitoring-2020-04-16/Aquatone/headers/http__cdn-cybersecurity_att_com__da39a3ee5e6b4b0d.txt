@@ -1,9 +1,0 @@
-403 Forbidden
-X-Amz-Cf-Id: kB6RzLe9AqMFs0VG1jRwt9OZa0Fbqdkxxm-iTqPT_jB2rQAfL_S2-w==
-X-Cache: Error from cloudfront
-Date: Thu, 16 Apr 2020 22:15:30 GMT
-Server: AmazonS3
-Via: 1.1 50422b3362db24ccd4a7fbc2662ef6d2.cloudfront.net (CloudFront)
-X-Amz-Cf-Pop: EZE51-C1
-Content-Type: application/xml
-Retry-Count: 0

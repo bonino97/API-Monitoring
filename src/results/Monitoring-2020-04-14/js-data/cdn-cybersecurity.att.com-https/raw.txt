@@ -1,2 +1,0 @@
-Usage: python /home/tools/tools/LinkFinder/linkfinder.py [Options] use -h for help
-Error: invalid input defined or SSL error: <urlopen error [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:852)>

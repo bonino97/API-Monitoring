@@ -1,5 +1,0 @@
-https://ecams-ft2.geico.com/resources/adobe/anti-flicker.js
-https://ecams-ft2.geico.com/resources/js/sga_0924.js
-https://ecams-ft2.geico.com/resources/opinion-lab/oo_combined_engine_conf.min.js
-https://ecams-ft2.geico.com/resources/tealeaf/tealeaf.config.js
-https://ecams-ft2.geico.com/resources/tealeaf/tealeaf.js

@@ -1,4 +1,0 @@
-https://coronanachrichten.twilio.com/docs/static/dist/js/brand-frame.min.245864cd9.js
-https://coronanachrichten.twilio.com/docs/static/dist/js/common.min.245864cd9.js
-https://coronanachrichten.twilio.com/docs/static/dist/js/homepage-2020H2.min.245864cd9.js
-https://coronanachrichten.twilio.com/gtm.js

@@ -1,0 +1,18 @@
+200 OK
+Retry-Count: 0
+Vary: Origin
+Cf-Request-Id: 02577d80510000d80934a40200000001
+Content-Type: text/html; charset=UTF-8
+Set-Cookie: __cfduid=db3674625dc1cf8c4049834640b8104451587894577; expires=Tue, 26-May-20 09:49:37 GMT; path=/; domain=.sol-data.com; HttpOnly; SameSite=Lax; Secure
+Accept-Ranges: bytes
+Last-Modified: Fri, 17 Apr 2020 00:22:06 GMT
+X-Envoy-Upstream-Service-Time: 1
+Expect-Ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Cf-Ray: 589f6513bbb6d809-EZE
+Date: Sun, 26 Apr 2020 09:49:38 GMT
+Content-Length: 1531
+Etag: "9d0f7fa7f1050146460a07e4ac069f7ffaa3e5ae"
+Cache-Control: public, max-age=3600
+Server: cloudflare
+Cf-Cache-Status: DYNAMIC
+Alt-Svc: h3-27=":443"; ma=86400, h3-25=":443"; ma=86400, h3-24=":443"; ma=86400, h3-23=":443"; ma=86400

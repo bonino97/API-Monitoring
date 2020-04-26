@@ -1,5 +1,4 @@
-const Sequelize = require('sequelize')
-
+const Sequelize = require('sequelize');
 
 
 module.exports = new Sequelize('Monitoring','postgres','ROOT',{
@@ -9,7 +8,7 @@ module.exports = new Sequelize('Monitoring','postgres','ROOT',{
     pool: {
         max: 5,
         min: 0,
-        acquire: 30000,
+        acquire: 2100000000,
         idle: 10000
     },
     logging: false,
@@ -17,3 +16,7 @@ module.exports = new Sequelize('Monitoring','postgres','ROOT',{
         timestamps: false
     }
 });
+
+
+
+

@@ -1,2 +1,0 @@
-http://esig.att.com/script.bundle.js
-http://esig.att.com/vendor.bundle.js

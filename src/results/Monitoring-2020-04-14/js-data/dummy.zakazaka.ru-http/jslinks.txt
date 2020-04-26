@@ -1,2 +1,0 @@
-http://dummy.zakazaka.ru/gtm.js
-http://dummy.zakazaka.ru/p.js

@@ -1,3 +1,0 @@
-https://landria.corp.twilio.com/app/main.652a6b2be95704d7de15.js
-https://landria.corp.twilio.com/app/runtime.652a6b2be95704d7de15.js
-https://landria.corp.twilio.com/app/vendors.652a6b2be95704d7de15.js

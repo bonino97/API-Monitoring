@@ -1,4 +1,0 @@
-http://secretsoftheoldcity.vhx.tv/assets/modernizr-293e2991cd4826d46ed9b7b3ab18b18c.js
-http://secretsoftheoldcity.vhx.tv/assets/onyx-vhxbundle-cc4175da0420d1e9b19d.js
-http://secretsoftheoldcity.vhx.tv/assets/sites-vhxbundle-b5ef3ed977cf785157de.js
-http://secretsoftheoldcity.vhx.tv/assets/vendor-vhxbundle-8b037cfc5390d1ff3ace.js

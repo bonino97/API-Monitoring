@@ -1,0 +1,13 @@
+200 OK
+Cf-Ray: 589f65131a94f80a-EZE
+Expect-Ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Retry-Count: 0
+Age: 2
+Cf-Cache-Status: HIT
+Set-Cookie: __cfduid=dacccfdc00a1dc572833c813372dc02f61587894577; expires=Tue, 26-May-20 09:49:37 GMT; path=/; domain=.sol-data.com; HttpOnly; SameSite=Lax; Secure
+Vary: Accept-Encoding
+Alt-Svc: h3-27=":443"; ma=86400, h3-25=":443"; ma=86400, h3-24=":443"; ma=86400, h3-23=":443"; ma=86400
+Cf-Request-Id: 02577d7fee0000f80ac59ae200000001
+Date: Sun, 26 Apr 2020 09:49:37 GMT
+Content-Type: text/html
+Server: cloudflare

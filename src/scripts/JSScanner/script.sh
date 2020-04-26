@@ -32,8 +32,9 @@ rand=$((RANDOM % ${#QUOTES[@]}))
 printf "${YELLOW}[i]${END} ${QUOTES[$rand]}\\n"
 echo
 
-mkdir $1js-data
-mkdir $1js-files
+mkdir $1JSResults
+mkdir $1JSResults/js-data
+mkdir $1JSResults/js-files
 linkf=~/tools/LinkFinder/linkfinder.py
 
 printf "${YELLOW}[i]${END} Removing Duplicate Entries!"
@@ -52,20 +53,20 @@ do
         #mkdir js/$n1-$n2
         #mkdir db/$n1-$n2
 		
-		mkdir $1js-data/$n1-$n2
-        mkdir $1js-files/$n1-$n2
+		mkdir $1JSResults/js-data/$n1-$n2
+        mkdir $1JSResults/js-files/$n1-$n2
 
-        timeout 30 python3 $linkf -d -i $i -o cli > $1js-data/$n1-$n2/raw.txt
+        timeout 30 python3 $linkf -d -i $i -o cli > $1JSResults/js-data/$n1-$n2/raw.txt
 
-        jslinks=$(cat $1js-data/$n1-$n2/raw.txt | grep -oaEi "https?://[^\"\\'> ]+" | grep '\.js' | grep "$n1" | sort -u)
+        jslinks=$(cat $1JSResults/js-data/$n1-$n2/raw.txt | grep -oaEi "https?://[^\"\\'> ]+" | grep '\.js' | grep "$n1" | sort -u)
 
         if [[ ! -z $jslinks ]]
         then
                 for js in $jslinks
                 do
-                        python3 $linkf -i $js -o cli >> $1js-data/$n1-$n2/linkfinder.txt
-                        echo "$js" >> $1js-data/$n1-$n2/jslinks.txt
-			wget $js -P $1js-files/$n1-$n2/ -q
+                        python3 $linkf -i $js -o cli >> $1JSResults/js-data/$n1-$n2/linkfinder.txt
+                        echo "$js" >> $1JSResults/js-data/$n1-$n2/jslinks.txt
+			wget $js -P $1JSResults/js-files/$n1-$n2/ -q
                 done
         fi
         printf "${GREEN}[+]${END} $i ${YELLOW}done${END}.\\n"

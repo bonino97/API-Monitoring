@@ -1,6 +1,0 @@
-200 OK
-Server: nginx
-Date: Thu, 16 Apr 2020 22:10:04 GMT
-Content-Type: text/plain; charset=utf-8
-Content-Length: 15
-Retry-Count: 0

@@ -1,0 +1,6 @@
+staging.sol-data.com
+web.sol-data.com
+web-staging.sol-data.com
+js.sol-data.com
+api.sol-data.com
+api-staging.sol-data.com
