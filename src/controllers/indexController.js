@@ -162,162 +162,160 @@ const SubdomainEnumeration = async (req,res) => {
 const ExecuteMonitoring = async (req,res) => {
     try{
 
-        // if(todayDir){
-        //     shell.exec(`rm -r ${newSubdomainsFile}`);
-        //     var findomainExecuted = await ExecuteFindomain(todayDir, false)
-        //                                     .then (data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch((err)=> {
-        //                                         console.log("Break Executing Findomain: ", err);
-        //                                     });
-        // }
+        if(todayDir){
+            shell.exec(`rm -r ${newSubdomainsFile}`);
+
+            var findomainExecuted = await ExecuteFindomain(todayDir, false)
+                                            .then (data => {
+                                                return data
+                                            })
+                                            .catch((err)=> {
+                                                console.log("Break Executing Findomain: ", err);
+                                            });
+        }
     
-        // if(findomainExecuted){
-        //     var assetfinderExecuted = await ExecuteAssetfinder(todayDir, false)
-        //                                     .then (data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch((err)=> {
-        //                                         console.log("Break Executing AssetFinder: ", err);
-        //                                     });
-        // }
+        if(findomainExecuted){
+            var assetfinderExecuted = await ExecuteAssetfinder(todayDir, false)
+                                            .then (data => {
+                                                return data
+                                            })
+                                            .catch((err)=> {
+                                                console.log("Break Executing AssetFinder: ", err);
+                                            });
+        }
 
-        // if(assetfinderExecuted){
-        //     var subfinderExecuted = await ExecuteSubfinder(todayDir, false)
-        //                                     .then (data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch((err)=> {
-        //                                         console.log("Break Executing Subfinder: ", err);
-        //                                     });
-        // }
+        if(assetfinderExecuted){
+            var subfinderExecuted = await ExecuteSubfinder(todayDir, false)
+                                            .then (data => {
+                                                return data
+                                            })
+                                            .catch((err)=> {
+                                                console.log("Break Executing Subfinder: ", err);
+                                            });
+        }
         
-        // if(subfinderExecuted){
-        //     var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false)
-        //                                 .then (data => {
-        //                                     return data
-        //                                 })
-        //                                 .catch((err)=> {
-        //                                     console.log("Break Executing GoBuster: ", err);
-        //                                 });
-        // }
+        if(subfinderExecuted){
+            var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false)
+                                        .then (data => {
+                                            return data
+                                        })
+                                        .catch((err)=> {
+                                            console.log("Break Executing GoBuster: ", err);
+                                        });
+        }
 
-        // if(gobusterExecuted){
+        if(gobusterExecuted){
 
-        //     var saveNewSubExecuted = await SaveNewSubdomains()                                            
-        //                                     .then ( data => { 
-        //                                         return data 
-        //                                     })
-        //                                     .catch( err => { 
-        //                                         console.log("Break Saving new Subdomains: ", err) 
-        //                                     })
+            var saveNewSubExecuted = await SaveNewSubdomains()                                            
+                                            .then ( data => { 
+                                                return data 
+                                            })
+                                            .catch( err => { 
+                                                console.log("Break Saving new Subdomains: ", err) 
+                                            })
+        }
 
-        // }
+        if(saveNewSubExecuted){
 
-        // if(saveNewSubExecuted){
+            var httprobeExecuted = await ExecuteHttprobe(todayDir, newSubdomainsFile)
+                                            .then ( data => { 
+                                                return data 
+                                            })
+                                            .catch( err => { 
+                                                console.log("Break Executing Httprobe: ", err) 
+                                            });
+        }
 
-        //     var httprobeExecuted = await ExecuteHttprobe(todayDir, newSubdomainsFile)
-        //                                     .then ( data => { 
-        //                                         return data 
-        //                                     })
-        //                                     .catch( err => { 
-        //                                         console.log("Break Executing Httprobe: ", err) 
-        //                                     });
-        // }
+        if(httprobeExecuted){
+            var aquatoneExecuted = await ExecuteAquatone(todayDir)
+                                        .then (data => {
+                                            return data
+                                        })
+                                        .catch((err)=> {
+                                            console.log("Break Executing Aquatone: ", err);
+                                        });
+        }
 
-        // if(httprobeExecuted){
-        //     var aquatoneExecuted = await ExecuteAquatone(todayDir)
-        //                                 .then (data => {
-        //                                     return data
-        //                                 })
-        //                                 .catch((err)=> {
-        //                                     console.log("Break Executing Aquatone: ", err);
-        //                                 });
-        // }
+        if(aquatoneExecuted){
+            var jsscannerExecuted = await ExecuteJSScanner(todayDir)
+                                            .then (data => {
+                                                return data
+                                            })
+                                            .catch((err)=> {
+                                                console.log("Break Executing JSSCanner: ", err);
+                                            });
+        }
 
-        // if(aquatoneExecuted){
-        //     var jsscannerExecuted = await ExecuteJSScanner(todayDir)
-        //                                     .then (data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch((err)=> {
-        //                                         console.log("Break Executing JSSCanner: ", err);
-        //                                     });
-        // }
+        if(jsscannerExecuted){
+            var dataConsExecuted = await ExecuteDataConsumer(todayDir)  
+                                            .then(data => {
+                                                return data
+                                            })
+                                            .catch(err => {
+                                                console.log("Break when executes DataConsumer: ", err);   
+                                            });
+        }
 
-        // if(jsscannerExecuted){
-        //     var dataConsExecuted = await ExecuteDataConsumer(todayDir)  
-        //                                     .then(data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch(err => {
-        //                                         console.log("Break when executes DataConsumer: ", err);   
-        //                                     });
-        // }
+        if(dataConsExecuted){
+            var waybackExecuted = await ExecuteWaybackurls(todayDir)
+                                            .then(data => {
+                                                return data
+                                            })
+                                            .catch(err => {
+                                                console.log("Break when executes Waybackurls: ", err);   
+                                            });
+        }
 
-        // if(dataConsExecuted){
-        //     var waybackExecuted = await ExecuteWaybackurls(todayDir)
-        //                                     .then(data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch(err => {
-        //                                         console.log("Break when executes Waybackurls: ", err);   
-        //                                     });
-        // }
-
-        // if(waybackExecuted){
-        //     var dirsearchExecuted = await ExecuteDirsearch(todayDir)
-        //                                     .then(data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch(err => {
-        //                                         console.log("Break when executes Dirsearch: ", err);   
-        //                                     });
-        // }
+        if(waybackExecuted){
+            var dirsearchExecuted = await ExecuteDirsearch(todayDir)
+                                            .then(data => {
+                                                return data
+                                            })
+                                            .catch(err => {
+                                                console.log("Break when executes Dirsearch: ", err);   
+                                            });
+        }
         
-        // if(dirsearchExecuted){
-        //     var arjunExecuted = await ExecuteArjun(todayDir)
-        //                                     .then(data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch(err => {
-        //                                         console.log("Break when executes Arjun: ", err);   
-        //                                     });
-        // }
+        if(dirsearchExecuted){
+            var arjunExecuted = await ExecuteArjun(todayDir)
+                                            .then(data => {
+                                                return data
+                                            })
+                                            .catch(err => {
+                                                console.log("Break when executes Arjun: ", err);   
+                                            });
+        }
 
-        // if(arjunExecuted){
+        if(arjunExecuted){
 
-        //     var gospiderExecuted = await ExecuteGoSpider(todayDir)
-        //                                     .then(data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch(err => {
-        //                                         console.log("Break when executes GoSpider: ", err);   
-        //                                     });
-        // }
+            var gospiderExecuted = await ExecuteGoSpider(todayDir)
+                                            .then(data => {
+                                                return data
+                                            })
+                                            .catch(err => {
+                                                console.log("Break when executes GoSpider: ", err);   
+                                            });
+        }
 
-        // if(gospiderExecuted){
-        //     var getjsExecuted = await ExecuteGetJs(todayDir)
-        //                                 .then(data => {
-        //                                     return data
-        //                                 })
-        //                                 .catch(err => {
-        //                                     console.log("Break when executes GetJs: ", err);  
-        //                                 });
-        // }
+        if(gospiderExecuted){
+            var getjsExecuted = await ExecuteGetJs(todayDir)
+                                        .then(data => {
+                                            return data
+                                        })
+                                        .catch(err => {
+                                            console.log("Break when executes GetJs: ", err);  
+                                        });
+        }
 
-        // if(getjsExecuted){
-        //     var savedSubdomains = await SaveNewSubdomains()
-        //     .then(data => {
-        //         return data
-        //     })
-        //     .catch(err => {
-        //         console.log("Break when execute SaveSubdomains: ", err);   
-        //     });
-        // }
-
-        console.log('Bot HIJOP DE PUTAAAAAAAAA');
+        if(getjsExecuted){
+            var savedSubdomains = await SaveNewSubdomains()
+            .then(data => {
+                return data
+            })
+            .catch(err => {
+                console.log("Break when execute SaveSubdomains: ", err);   
+            });
+        }
 
         res.status(200).json({
             ok:true,
