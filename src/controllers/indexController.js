@@ -22,13 +22,12 @@ const date = dateFormat(new Date(), "yyyy-mm-dd");
 
 //DIR & FILES
 const resultDir = `../MonitoringResults/`;
-const allDir = `${resultDir}All/`;
+const allDir = CreateAllDir(resultDir);
 const todayDir = CreateTodayDir(date);
-
-const allSubdomainsFile = `${allDir}AllSubdomains.txt`;
+const allSubdomainsFile = CreateSubdomainsFile(allDir);
 const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
-const programsFile = `${allDir}Programs2.txt`;
+const programsFile = `../programs/programs2.txt`;
 const goDir =`~/go/bin/`;
 
 //TOOLS
@@ -339,13 +338,15 @@ const ExecuteMonitoring = async (req,res) => {
 //#######################---DIRECTORY FUNCTIONS---################################
 //################################################################################
 
-async function CreateAllDir(){
+function CreateAllDir(dir){
     try{
 
-        if(fs.existsSync(resultDir )){
+        const allDir = `${dir}All/`;
+
+        if(fs.existsSync(dir)){
             console.log('Results Directory Exists.');
         } else { 
-            shell.exec(`mkdir ${resultDir}`)
+            shell.exec(`mkdir ${dir}`)
         }
 
         if( fs.existsSync(allDir) ){
@@ -384,10 +385,10 @@ function CreateTodayDir(date){
     }
 }
 
-async function CreateSubdomainsFile(todayDir){
+function CreateSubdomainsFile(dir){
     try{
 
-        const defaultFile = `${todayDir}Subdomains.txt`;
+        const defaultFile = `${dir}AllSubdomains.txt`;
 
         if( fs.existsSync(defaultFile) ){
             
@@ -434,15 +435,14 @@ async function ExecuteFindomain(dir, enumeration){
 
         const findomainFile = `${dir}FindomainDomains.txt`;
 
+        if(fs.existsSync(findomainFile)){
+            shell.exec(`rm -r ${findomainFile}`);
+        }
+
         console.log('############################################################################################');
         console.log('###############################---Findomain Started---######################################');
         console.log('############################################################################################');
-        
-        shell.exec(`export findomain_fb_token="636867740443073|P8-mddEno6zbjHrN5beEKLgZP2Y"`);
-        shell.exec(`export findomain_virustotal_token="4a4cbb62ef682d82998d241edd5797a4790ad977cce2302dba124d70dccd5693"`);
-        shell.exec(`export findomain_securitytrails_token="SZYVBsbnVl6ms5vTiGiMBO|eyDCZTGKwz"`);
 
-        shell.exec(`rm -r ${findomainFile}`);
         shell.exec(`findomain -f ${programsFile} -u ${findomainFile}`);
 
         if(enumeration){
@@ -466,17 +466,18 @@ async function ExecuteFindomain(dir, enumeration){
 
 async function ExecuteAssetfinder(dir, enumeration){
     try {
-        
+
         const assetfinderFile = `${dir}AssetFinderDomains.txt`;
+        
+        if(fs.existsSync(assetfinderFile)){
+            shell.exec(`rm -r ${assetfinderFile}`);
+        }
 
         console.log('############################################################################################');
         console.log('###############################---AssetFinder Stated---#####################################');
         console.log('############################################################################################');
         
-        shell.exec(`rm -r ${assetfinderFile}`);
         shell.exec(`cat ${programsFile} | ${assetfinderTool} --subs-only | tee -a ${assetfinderFile}`);
-
-        
 
         if(enumeration){
             shell.exec(`sed 's/Found: //g' ${assetfinderFile} >> ${allSubdomainsFile}`);
@@ -504,11 +505,14 @@ async function ExecuteSubfinder(dir, enumeration){
         
         const subfinderFile = `${dir}/SubfinderDomains.txt`;
 
+        if(fs.existsSync(subfinderFile)){
+            shell.exec(`rm -r ${subfinderFile}`);
+        }
+
         console.log('############################################################################################');
         console.log('###############################---Subfinder Started---######################################');
         console.log('############################################################################################');
 
-        shell.exec(`rm -r ${subfinderFile}`);
         shell.exec(`subfinder -dL ${programsFile} -o ${subfinderFile}`);
 
         if(enumeration){
@@ -535,6 +539,10 @@ async function ExecuteGobusterDNS(dir,gobusterDict, enumeration){
         const data = fs.readFileSync(programsFile, 'UTF-8');
         const dataArr = data.split('\n');
         const gobusterFile = `${dir}GobusterDomains.txt`;
+
+        if(fs.existsSync(gobusterFile)){
+            shell.exec(`rm -r ${gobusterFile}`);
+        }
 
         console.log('############################################################################################');
         console.log('###############################---Gobuster Started---#######################################');
@@ -578,14 +586,15 @@ async function ExecuteGitSubdomains(dir){
         const dataArr = data.split('\n');
         const gitTxt = `${dir}/GitSubdomains.txt`;
 
+        if(fs.existsSync(gitTxt)){
+            shell.exec(`rm -r ${gitTxt}`);
+        }
+
         //python3 ~/tools/github-search/github-subdomains.py -d youporn.com -t ${gitToken}
 
         console.log('############################################################################################');
         console.log('###############################---GitSubdomains Started---##################################');
         console.log('############################################################################################');
-
-
-        shell.exec(`rm -r ${gitTxt}`);
 
         fs.appendFileSync(gitTxt, '', (err) => {
             if (err) {
