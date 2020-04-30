@@ -42,6 +42,7 @@ const getjsTool = `${goDir}getJS`;
 
 //TOKEN & APIKEYS. 
 const gitToken = `dcef34578292f6c0cd1922d2cd1fa8146755b0ea`;
+const executeApiKeys = ExecuteApiKeys();
 
 //DICCS
 const dnsSmallDict = `./scripts/gobuster-dnslists/new-100.txt`;
@@ -590,8 +591,6 @@ async function ExecuteGitSubdomains(dir){
             shell.exec(`rm -r ${gitTxt}`);
         }
 
-        //python3 ~/tools/github-search/github-subdomains.py -d youporn.com -t ${gitToken}
-
         console.log('############################################################################################');
         console.log('###############################---GitSubdomains Started---##################################');
         console.log('############################################################################################');
@@ -954,6 +953,9 @@ async function ExecuteGetJs(dir){
 //########################---OTHER FUNCTIONS \+_+/---#############################
 //################################################################################
 
+function ExecuteApiKeys(){
+    shell.exec('./config/apikeys.sh');
+}
 
 async function TxtSpliter(){
     var pathOld = './scripts/gobuster-dnslists/top-100.txt';
