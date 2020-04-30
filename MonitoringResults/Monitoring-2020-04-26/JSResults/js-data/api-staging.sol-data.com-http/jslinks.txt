@@ -1,2 +1,0 @@
-http://api-staging.sol-data.com/./vendor/swagger-ui-bundle.js
-http://api-staging.sol-data.com/./vendor/swagger-ui-standalone-preset.js

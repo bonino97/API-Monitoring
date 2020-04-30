@@ -12,8 +12,8 @@ const Headers = require('../models/Headers');
 const Stacks = require('../models/Stacks');
 const Information = require('../models/Information');
 const Urls = require('../models/Urls');
+
 //DB CONFIGS
-const FindomainDB = require('../config/findomain-db');
 const MonitoringDB = require('../config/monitoring-db');
 
 //CONSTANTS
@@ -32,25 +32,27 @@ const programsFile = `${allDir}Programs2.txt`;
 const goDir =`~/go/bin/`;
 
 //TOOLS
+
 const assetfinderTool = `~/go/bin/assetfinder`;
 const gitTool = `python3 ~/tools/github-search/github-subdomains.py`;
+const waybackTool = `${goDir}waybackurls`;
+const dirsearchTool = `python3 ~/tools/dirsearch/dirsearch.py`;
+const arjunTool = `python3 ~/tools/Arjun/arjun.py`;
+const gospiderTool = `${goDir}gospider`;
+const getjsTool = `${goDir}getJS`;
 
-//TOKEN & APIKEYS.
+//TOKEN & APIKEYS. 
 const gitToken = `dcef34578292f6c0cd1922d2cd1fa8146755b0ea`;
 
 //DICCS
 const dnsSmallDict = `./scripts/gobuster-dnslists/new-100.txt`;
 const dnsBigDict = `./scripts/gobuster-dnslists/dnslist.txt`;
+const dirsearchDict = `./scripts/dirsearch-list/RAFT-medium-directories.txt`;
+const paramsDict = `~/tools/Arjun/db/params.txt`; 
+const altdnsDict = `~/tools/altdns/words.txt`; 
 
 //DB
 
-const findoPool = new Pool({
-                host: FindomainDB.host,
-                user: FindomainDB.user,
-                password: FindomainDB.password,
-                database: FindomainDB.database,
-                port: FindomainDB.port
-            });
 
 const monitPool = new Pool({
                         host: MonitoringDB.host,
@@ -68,9 +70,6 @@ const monitPool = new Pool({
 const test = async (req,res) => {
 
     try {
-        
-
-
         res.status(200).json({
             ok:true,
             msg: 'Complete Subdomain Enumeration Finish...'
@@ -129,22 +128,31 @@ const SubdomainEnumeration = async (req,res) => {
         }
 
         if(gobusterExecuted){
-            // var gitSubExecuted = await ExecuteGitSubdomains(allDir)
-            //                                 .then (data => {
-            //                                     return data
-            //                                 })
-            //                                 .catch((err)=> {
-            //                                     console.log("Break Executing GitHub Subdomains: ", err);
-            //                                 });
+            var gitSubExecuted = await ExecuteGitSubdomains(allDir)
+                                            .then (data => {
+                                                return data
+                                            })
+                                            .catch((err)=> {
+                                                console.log("Break Executing GitHub Subdomains: ", err);
+                                            });
         }
 
+        if(gitSubExecuted){
+            var altdnsExecuted = await ExecuteAltDNS(allDir)
+                                            .then (data => {
+                                                return data
+                                            })
+                                            .catch((err)=> {
+                                                console.log("Break Executing AltDNS: ", err);
+                                            });
+        }
 
-
-        res.status(200).json({
-            ok:true,
-            msg: 'Complete Subdomain Enumeration Finish...'
-        });
-
+        if(altdnsExecuted){
+            res.status(200).json({
+                ok:true,
+                msg: 'Complete Subdomain Enumeration Finish...'
+            });
+        }
     }
     catch(err){
         console.log(err);
@@ -164,8 +172,7 @@ const ExecuteMonitoring = async (req,res) => {
         //                                         console.log("Break Executing Findomain: ", err);
         //                                     });
         // }
-        
-
+    
         // if(findomainExecuted){
         //     var assetfinderExecuted = await ExecuteAssetfinder(todayDir, false)
         //                                     .then (data => {
@@ -185,8 +192,7 @@ const ExecuteMonitoring = async (req,res) => {
         //                                         console.log("Break Executing Subfinder: ", err);
         //                                     });
         // }
-
-
+        
         // if(subfinderExecuted){
         //     var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false)
         //                                 .then (data => {
@@ -230,142 +236,105 @@ const ExecuteMonitoring = async (req,res) => {
         //                                 });
         // }
 
-        let aquatoneExecuted = true;
+        // if(aquatoneExecuted){
+        //     var jsscannerExecuted = await ExecuteJSScanner(todayDir)
+        //                                     .then (data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch((err)=> {
+        //                                         console.log("Break Executing JSSCanner: ", err);
+        //                                     });
+        // }
 
-        if(aquatoneExecuted){
-            var jsscannerExecuted = await ExecuteJSScanner(todayDir)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break Executing JSSCanner: ", err);
-                                            });
-        }
-                    
-    }
-    catch(err){
-        console.log(err);
-    }
-};
+        // if(jsscannerExecuted){
+        //     var dataConsExecuted = await ExecuteDataConsumer(todayDir)  
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break when executes DataConsumer: ", err);   
+        //                                     });
+        // }
 
-const FindomainSubdomains = async (req,res) => {
+        // if(dataConsExecuted){
+        //     var waybackExecuted = await ExecuteWaybackurls(todayDir)
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break when executes Waybackurls: ", err);   
+        //                                     });
+        // }
 
-    const allSubdomains = await findoPool.query(`SELECT name FROM subdomains;`);
-    const allSubdomainsRows = allSubdomains.rows;
+        // if(waybackExecuted){
+        //     var dirsearchExecuted = await ExecuteDirsearch(todayDir)
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break when executes Dirsearch: ", err);   
+        //                                     });
+        // }
+        
+        // if(dirsearchExecuted){
+        //     var arjunExecuted = await ExecuteArjun(todayDir)
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break when executes Arjun: ", err);   
+        //                                     });
+        // }
 
-    const allDir = await CreateAllDir()
-                            .then (data => {
-                                return data
-                            })
-                            .catch((err)=> {
-                                console.log("Break creating All Directory: ", err);
-                            });
+        // if(arjunExecuted){
 
-    // const allSubdomainsFile = await createAllSubdomainsFile(allDir)
-    //                                     .then (data => {
-    //                                         return data
-    //                                     })
-    //                                     .catch((err)=> {
-    //                                         console.log("Break creating All Subdomain File: ", err);
-    //                                     });
+        //     var gospiderExecuted = await ExecuteGoSpider(todayDir)
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break when executes GoSpider: ", err);   
+        //                                     });
+        // }
 
-    const subdomainExecuted = await ExecuteAllSubdomainsScan(allSubdomainsRows, allSubdomainsFile)
-                                    .then (data => {
-                                        return data
-                                    })
-                                    .catch((err)=> {
-                                        console.log("Break executing All Subdomains: ", err);
-                                    });
+        // if(gospiderExecuted){
+        //     var getjsExecuted = await ExecuteGetJs(todayDir)
+        //                                 .then(data => {
+        //                                     return data
+        //                                 })
+        //                                 .catch(err => {
+        //                                     console.log("Break when executes GetJs: ", err);  
+        //                                 });
+        // }
 
-    if(subdomainExecuted){
+        // if(getjsExecuted){
+        //     var savedSubdomains = await SaveNewSubdomains()
+        //     .then(data => {
+        //         return data
+        //     })
+        //     .catch(err => {
+        //         console.log("Break when execute SaveSubdomains: ", err);   
+        //     });
+        // }
+
+        console.log('Bot HIJOP DE PUTAAAAAAAAA');
+
         res.status(200).json({
             ok:true,
-            msg: 'Subdomain Update Completed'
-        });
-    }
-
-    res.status(400).json({
-        ok: false,
-        msg: 'Subdomain Update Failed'
-    })
-};
-
-const FindomainMonitoring = async (req,res) => {
-    try{
-        const latestSubdomains = await findoPool.query(`SELECT name FROM subdomains WHERE created > (NOW() - interval '24 hours')  AND created < (NOW() + interval '24 hours');`);
-
-        const latestSubdomainRows = latestSubdomains.rows;
-
-        const todaySubdomainFile = await CreateSubdomainsFile(todayDir)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break creating today Subdomain File: ", err);
-                                            });        
-    
-        const subdomainExecuted = await ExecuteSubdomainScan(latestSubdomainRows, todaySubdomainFile)
-                                                            .then (data => {
-                                                                return data
-                                                            })
-                                                            .catch((err)=> {
-                                                                console.log("Break executing Subdomain Scan: ", err);
-                                                            });
-
-        if(subdomainExecuted){
-            var httprobeExecuted = await ExecuteHttprobe(todayDir, todaySubdomainFile)
-                                                .then (data => {
-                                                    return data
-                                                })
-                                                .catch((err)=> {
-                                                    console.log("Break executing Subdomain Scan: ", err);
-                                                });
-        }
-
-
-        if(httprobeExecuted){
-            var aquatoneExecuted = await ExecuteAquatone(todayDir)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break executing Aquatone: ", err);
-                                            });
-        }
-
-        if(aquatoneExecuted){
-            var dataConsExecuted = await ExecuteDataConsumer(todayDir)  
-                                            .then(data => {
-                                                return data
-                                            })
-                                            .catch(err => {
-                                                console.log("API Break when executes DataConsumer: ", err);   
-                                            });
-        }
-
-        if(dataConsExecuted){
-            var scriptExecuted = await ExecuteJSScanner(todayDir)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break executing Subdomain Scan: ", err);
-                                            });
-        }
-
-        res.status(200).json({
-           ok:true
+            msg: 'Complete Subdomain Enumeration Finish...'
         });
     }
     catch(err){
         console.log(err);
     }
 };
-
 
 //################################################################################
 //##############################---ENDPOINTS---###################################
 //################################################################################
+
+
+//////////////////////////////////////////////////////////////////////////////////
 
 
 //################################################################################
@@ -456,57 +425,7 @@ async function CreateAquatoneDir(todayDir){
 //#######################---DIRECTORY FUNCTIONS---################################
 //################################################################################
 
-async function ExecuteAllSubdomainsScan(allSubdomainsRows, allSubdomainsFile){
-    try{
-
-        console.log('Starting update of Subdomains! - This may take a while...');
-
-        allSubdomainsRows.forEach(element => {
-            
-            fs.appendFileSync(allSubdomainsFile, element.name+'\n', (err) => {
-                
-                if (err) {
-                    return console.log(err);
-                }
-    
-            });
-        });
-
-        console.log('Removing duplicate entries!');
-
-        shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
-
-        return true;
-    }
-    catch(err){
-        return err;
-    }
-}
-
-async function ExecuteSubdomainScan(latestSubdomainRows, todaySubdomainFile){
-    try{
-
-        latestSubdomainRows.forEach(element => {
-            
-            fs.appendFileSync(todaySubdomainFile, element.name+'\n', (err) => {
-                
-                if (err) {
-                    return console.log(err);
-                }
-    
-            });
-        });
-
-        console.log('Removing duplicate entries!');
-
-        shell.exec(`sort -u ${todaySubdomainFile} -o ${todaySubdomainFile}`);
-
-        return true;
-    }
-    catch(err){
-        return err;
-    }
-}
+//////////////////////////////////////////////////////////////////////////////////
 
 //################################################################################
 //###############---SUBDOMAIN ENUMERATION FUNCTIONS---############################
@@ -699,13 +618,56 @@ async function ExecuteGitSubdomains(dir){
     }
 }
 
-async function ExecuteAltDNS(allDir){   
+async function ExecuteAltDNS(dir){   
+    try {
 
+        const altdnsFile = `${dir}AltdnsDomains.txt`;
+        const altdnsFileAux = `${dir}AltdnsAuxDomains.txt`;
+        const permAltdnsFile = `${dir}AltdnsPermutatedDomains.txt`;
+
+        console.log('############################################################################################');
+        console.log('###############################---AltDNS Started---#########################################');
+        console.log('############################################################################################');
+
+        shell.exec(`rm -r ${altdnsFile}`);
+        shell.exec(`rm -r ${altdnsFileAux}`);
+
+        shell.exec(`altdns -i ${programsFile} -o ${permAltdnsFile} -r -s ${altdnsFileAux} -t 50 -w ${altdnsDict}`);
+
+        let altdnsReadFile = fs.readFileSync(altdnsFileAux, 'UTF-8');
+        let altdnsArray = altdnsReadFile.split('\n');
+        
+        altdnsArray.forEach(elem => {
+            console.log(elem.split(':')[0]);
+
+            fs.appendFileSync(altdnsFile,elem.split(':')[0]+'\n');
+            
+        })
+        
+        shell.exec(`rm -r ${altdnsFileAux}`);
+        shell.exec(`rm -r ${permAltdnsFile}`);
+
+        shell.exec(`sed 's/Found: //g' ${altdnsFile} >> ${allSubdomainsFile}`);
+        shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`); //Removing duplicate entries.
+
+        console.log('############################################################################################');
+        console.log('###############################---AltDNS Finish---##########################################');
+        console.log('############################################################################################');
+
+        return true;
+    }
+    catch(err){
+        console.log(err);
+        return false;
+    }
 }
 
 //################################################################################
 //###############---SUBDOMAIN ENUMERATION FUNCTIONS---############################
 //################################################################################
+
+
+//////////////////////////////////////////////////////////////////////////////////
 
 
 //################################################################################
@@ -756,16 +718,16 @@ async function ExecuteHttprobe(dir, file){
     }
 }
 
-async function ExecuteAquatone(todayDir){
+async function ExecuteAquatone(dir){
     try {
         
-        let aquatoneDir = await CreateAquatoneDir(todayDir)
+        let aquatoneDir = await CreateAquatoneDir(dir)
                                     .catch((err)=> {
                                         console.log('Aquatone Directory Failed: ', err);
                                         return err;
                                     });
 
-        let syntax = `cat ${todayDir}/Alive.txt | ~/go/bin/aquatone -ports large -out ${aquatoneDir}`;
+        let syntax = `cat ${dir}/Alive.txt | ~/go/bin/aquatone -ports large -out ${aquatoneDir}`;
 
         console.log('Screenshoting Alive Domains!');
 
@@ -871,14 +833,104 @@ async function ExecuteDataConsumer(todayDir){
 
 }
 
-async function ExecuteJSScanner(todayDir){
+async function ExecuteJSScanner(dir){
     try {
 
-        let syntax = `./scripts/JSScanner/script.sh ${todayDir}`;
+        let syntax = `./scripts/JSScanner/script.sh ${dir}`;
 
-        console.log('Screenshoting Alive Domains!');
+        console.log('Extracting JS Files!');
 
         shell.exec(syntax);
+
+        return true;
+    }
+    catch(err){
+        return err;
+    }
+}
+
+async function ExecuteWaybackurls(dir){
+    try {
+
+        let syntax = `cat ${dir}Alive.txt | ${waybackTool} >> ${dir}Waybackurls.txt`;
+
+        console.log('Searching Waybackurls!');
+
+        shell.exec(syntax);
+
+        console.log('Waybackurls Finish!');
+
+        return true;
+    }
+    catch(err){
+        return err;
+    }
+}
+
+async function ExecuteDirsearch(dir){
+    try {
+
+        let syntax = `${dirsearchTool} -L ${dir}Alive.txt -t 70 -w ${dirsearchDict} -e html,js,php,png,jpg,sql,json,xml,htm,css,asp,jsp,aspx,jspx,git -x 404,301,400,500,302,403,401,503 --simple-report=${dir}Dirsearch.txt`;
+
+        console.log('Executing Dirsearch');
+
+        shell.exec(syntax);
+
+        console.log('Dirsearch Finish!');
+
+        return true;
+    }
+    catch(err){
+        return err;
+    }
+}
+
+async function ExecuteArjun(dir){
+    try {
+
+        let syntax = `${arjunTool} --urls ${dir}Alive.txt --get -f ${paramsDict} -t 40 -o ${dir}/Arjun.json`;
+
+        console.log('Executing Arjun');
+
+        shell.exec(syntax);
+
+        console.log('Arjun Finish!');
+
+        return true;
+    }
+    catch(err){
+        return err;
+    }
+}
+
+async function ExecuteGoSpider(dir){
+    try {
+
+        let syntax = `${gospiderTool} -S ${dir}Alive.txt -d 0 -t 3 --sitemap -o ${dir}/GoSpider`;
+
+        console.log('Executing GoSpider');
+
+        shell.exec(syntax);
+
+        console.log('GoSpider Finish!');
+
+        return true;
+    }
+    catch(err){
+        return err;
+    }
+}
+
+async function ExecuteGetJs(dir){
+    try {
+
+        let syntax = `cat ${dir}Alive.txt | ${getjsTool} -resolve -complete -output=${dir}GetJS.txt`;
+
+        console.log('Executing GetJS');
+
+        shell.exec(syntax);
+
+        console.log('GetJS Finish!');
 
         return true;
     }
@@ -890,6 +942,11 @@ async function ExecuteJSScanner(todayDir){
 //################################################################################
 //###############---SUBDOMAIN MONITORING FUNCTIONS---#############################
 //################################################################################
+
+//################################################################################
+//########################---OTHER FUNCTIONS \+_+/---#############################
+//################################################################################
+
 
 async function TxtSpliter(){
     var pathOld = './scripts/gobuster-dnslists/top-100.txt';
@@ -945,11 +1002,64 @@ async function SelectUrls(){
     }
 }
 
+async function ExecuteAllSubdomainsScan(allSubdomainsRows, allSubdomainsFile){
+    try{
+
+        console.log('Starting update of Subdomains! - This may take a while...');
+
+        allSubdomainsRows.forEach(element => {
+            
+            fs.appendFileSync(allSubdomainsFile, element.name+'\n', (err) => {
+                
+                if (err) {
+                    return console.log(err);
+                }
+    
+            });
+        });
+
+        console.log('Removing duplicate entries!');
+
+        shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
+
+        return true;
+    }
+    catch(err){
+        return err;
+    }
+}
+
+async function ExecuteSubdomainScan(latestSubdomainRows, todaySubdomainFile){
+    try{
+
+        latestSubdomainRows.forEach(element => {
+            
+            fs.appendFileSync(todaySubdomainFile, element.name+'\n', (err) => {
+                
+                if (err) {
+                    return console.log(err);
+                }
+    
+            });
+        });
+
+        console.log('Removing duplicate entries!');
+
+        shell.exec(`sort -u ${todaySubdomainFile} -o ${todaySubdomainFile}`);
+
+        return true;
+    }
+    catch(err){
+        return err;
+    }
+}
+
+//################################################################################
+//########################---OTHER FUNCTIONS \+_+/---#############################
+//################################################################################
 
 
 module.exports = {
-    FindomainSubdomains,
-    FindomainMonitoring,
     SubdomainEnumeration,
     ExecuteMonitoring,
     test

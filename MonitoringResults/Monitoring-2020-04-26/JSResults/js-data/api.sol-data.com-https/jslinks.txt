@@ -1,2 +1,0 @@
-https://api.sol-data.com/./vendor/swagger-ui-bundle.js
-https://api.sol-data.com/./vendor/swagger-ui-standalone-preset.js

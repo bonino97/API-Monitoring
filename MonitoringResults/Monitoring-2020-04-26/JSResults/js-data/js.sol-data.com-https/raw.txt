@@ -1,3 +1,0 @@
-application/x-www-form-urlencoded
-text/javascript
-https://sol-http.jobapi.io/v1/track

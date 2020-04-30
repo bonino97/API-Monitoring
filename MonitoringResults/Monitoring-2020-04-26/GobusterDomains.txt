@@ -1,2 +1,0 @@
-web.sol-data.com
-api.sol-data.com
