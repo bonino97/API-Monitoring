@@ -954,6 +954,7 @@ async function ExecuteGetJs(dir){
 //################################################################################
 
 function ExecuteApiKeys(){
+    shell.exec('chmod +x ./config/apikeys.sh');
     shell.exec('./config/apikeys.sh');
 }
 
