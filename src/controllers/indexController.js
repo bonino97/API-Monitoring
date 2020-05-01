@@ -74,6 +74,7 @@ const test = async (req,res) => {
     const newSubArray = newSubFile.split('\n');
     
     try{
+        console.log('Init Insert.');
         await clientPool.query('BEGIN');
         
         newSubArray.forEach(async elem => {
@@ -87,6 +88,12 @@ const test = async (req,res) => {
         console.log(err);   
         await clientPool.query('ROLLBACK');
         return false;
+    }
+    finally{
+        res.status(200).json({
+            ok:true,
+            msg: 'Updated Complete...'
+        });
     }
 
 };
@@ -211,7 +218,7 @@ const ExecuteMonitoring = async (req,res) => {
         }
 
         if(gobusterExecuted){
-            
+
             shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
 
             var saveNewSubExecuted = await SaveNewSubdomains()                                            
