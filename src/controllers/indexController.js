@@ -75,6 +75,7 @@ const test = async (req,res) => {
     
     try{
         console.log('Init Insert.');
+        console.log(newSubArray);
         await clientPool.query('BEGIN');
         
         newSubArray.forEach(async elem => {
