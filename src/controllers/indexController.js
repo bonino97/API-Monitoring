@@ -75,11 +75,11 @@ const test = async (req,res) => {
     
     try{
         console.log('Init Insert.');
-        console.log(newSubArray);
         await clientPool.query('BEGIN');
         
         newSubArray.forEach(async elem => {
             const queryText = `INSERT INTO urls (url) VALUES('${elem}');`
+            console.log(elem);
             await clientPool.query(queryText);
         });
         console.log("\x1b[32m",'New Subdomains added in Monitoring Database...');
