@@ -1,2 +1,1 @@
 semmle.com
-semmle.net

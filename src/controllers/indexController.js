@@ -27,7 +27,7 @@ const todayDir = CreateTodayDir(date);
 const allSubdomainsFile = CreateSubdomainsFile(allDir);
 const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
-const programsFile = `../programs/programs.txt`;
+const programsFile = `../programs/programs2.txt`;
 const goDir =`~/go/bin/`;
 
 //TOOLS
@@ -69,16 +69,23 @@ const monitPool = new Pool({
 
 const test = async (req,res) => {
 
-    try {
-        res.status(200).json({
-            ok:true,
-            msg: 'Complete Subdomain Enumeration Finish...'
+    const clientPool = await monitPool.connect();
+    const newSubFile = fs.readFileSync(allSubdomainsFile, 'UTF-8');
+    const newSubArray = newSubFile.split('\n');
+    
+    try{
+        await clientPool.query('BEGIN');
+        
+        newSubArray.forEach(async elem => {
+            const queryText = `INSERT INTO urls (url) VALUES('${elem}');`
+            await clientPool.query(queryText);
         });
-
-
+        console.log("\x1b[32m",'New Subdomains added in Monitoring Database...');
+        await clientPool.query('COMMIT');
     }
     catch(err){
-        console.log(err);
+        console.log(err);   
+        await clientPool.query('ROLLBACK');
         return false;
     }
 
@@ -163,7 +170,6 @@ const ExecuteMonitoring = async (req,res) => {
     try{
 
         if(todayDir){
-            shell.exec(`rm -r ${newSubdomainsFile}`);
 
             var findomainExecuted = await ExecuteFindomain(todayDir, false)
                                             .then (data => {
@@ -205,6 +211,8 @@ const ExecuteMonitoring = async (req,res) => {
         }
 
         if(gobusterExecuted){
+            
+            shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
 
             var saveNewSubExecuted = await SaveNewSubdomains()                                            
                                             .then ( data => { 
@@ -308,19 +316,11 @@ const ExecuteMonitoring = async (req,res) => {
         }
 
         if(getjsExecuted){
-            var savedSubdomains = await SaveNewSubdomains()
-            .then(data => {
-                return data
-            })
-            .catch(err => {
-                console.log("Break when execute SaveSubdomains: ", err);   
+            res.status(200).json({
+                ok:true,
+                msg: 'Complete Subdomain Enumeration Finish...'
             });
         }
-
-        res.status(200).json({
-            ok:true,
-            msg: 'Complete Subdomain Enumeration Finish...'
-        });
     }
     catch(err){
         console.log(err);
@@ -447,6 +447,7 @@ async function ExecuteFindomain(dir, enumeration){
         shell.exec(`findomain -f ${programsFile} -u ${findomainFile}`);
 
         if(enumeration){
+            shell.exec(`grep -xvf ${allSubdomainsFile} ${findomainFile} >> ${newSubdomainsFile}`);
             shell.exec(`sed 's/Found: //g' ${findomainFile} >> ${allSubdomainsFile}`);
             shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`); //Removing duplicate entries.
         } else {
@@ -481,6 +482,7 @@ async function ExecuteAssetfinder(dir, enumeration){
         shell.exec(`cat ${programsFile} | ${assetfinderTool} --subs-only | tee -a ${assetfinderFile}`);
 
         if(enumeration){
+            shell.exec(`grep -xvf ${allSubdomainsFile} ${assetfinderFile} >> ${newSubdomainsFile}`);
             shell.exec(`sed 's/Found: //g' ${assetfinderFile} >> ${allSubdomainsFile}`);
             shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
         } else {
@@ -517,6 +519,7 @@ async function ExecuteSubfinder(dir, enumeration){
         shell.exec(`subfinder -dL ${programsFile} -o ${subfinderFile}`);
 
         if(enumeration){
+            shell.exec(`grep -xvf ${allSubdomainsFile} ${subfinderFile} >> ${newSubdomainsFile}`);
             shell.exec(`sed 's/Found: //g' ${subfinderFile} >> ${allSubdomainsFile}`);
             shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
         } else {
@@ -562,6 +565,7 @@ async function ExecuteGobusterDNS(dir,gobusterDict, enumeration){
         });
 
         if(enumeration){
+            shell.exec(`grep -xvf ${allSubdomainsFile} ${gobusterFile} >> ${newSubdomainsFile}`);
             shell.exec(`sed 's/Found: //g' ${gobusterFile} >> ${allSubdomainsFile}`);
             shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
         } else {
@@ -607,6 +611,7 @@ async function ExecuteGitSubdomains(dir){
             shell.exec(`rm -r ${dir}AuxGitSubdomains.txt`);
         });
 
+        shell.exec(`grep -xvf ${allSubdomainsFile} ${gitTxt} >> ${newSubdomainsFile}`);
         shell.exec(`sed 's/Found: //g' ${gitTxt} >> ${allSubdomainsFile}`);
         shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
 
@@ -653,6 +658,7 @@ async function ExecuteAltDNS(dir){
         shell.exec(`rm -r ${altdnsFileAux}`);
         shell.exec(`rm -r ${permAltdnsFile}`);
 
+        shell.exec(`grep -xvf ${allSubdomainsFile} ${altdnsFile} >> ${newSubdomainsFile}`);
         shell.exec(`sed 's/Found: //g' ${altdnsFile} >> ${allSubdomainsFile}`);
         shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`); //Removing duplicate entries.
 
@@ -668,6 +674,8 @@ async function ExecuteAltDNS(dir){
     }
 }
 
+
+
 //################################################################################
 //###############---SUBDOMAIN ENUMERATION FUNCTIONS---############################
 //################################################################################
@@ -681,7 +689,7 @@ async function ExecuteAltDNS(dir){
 //################################################################################
 
 async function SaveNewSubdomains(){
-
+    
     const clientPool = await monitPool.connect();
     const newSubFile = fs.readFileSync(newSubdomainsFile, 'UTF-8');
     const newSubArray = newSubFile.split('\n');
