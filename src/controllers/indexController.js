@@ -24,7 +24,9 @@ const date = dateFormat(new Date(), "yyyy-mm-dd");
 const resultDir = `../MonitoringResults/`;
 const allDir = CreateAllDir(resultDir);
 const todayDir = CreateTodayDir(date);
-const logsDir = `${resultDir}Logs/Logs-${date}.txt`;
+const logsDir = CreateLogs();
+console.log(logsDir);
+
 const allSubdomainsFile = CreateSubdomainsFile(allDir);
 const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
@@ -100,6 +102,23 @@ const test = async (req,res) => {
 
 };
 
+const Welcome = async(req,res) => {
+    try{
+        return res.status(200).json({
+            ok:true,
+            msg: `Welcome to Lemon-Monitoring API`
+        });
+    }
+    catch(err){
+        console.log("Welcome Page Fail: ", err);
+        fs.appendFileSync(logsDir,err+'\n');
+        return res.status(400).json({
+            ok: false,
+            msg: `Welcome Page Fail - Review logs in ${logsDir}...`
+        });
+    }
+};
+
 const SubdomainEnumeration = async (req,res) => {
     try{
 
@@ -110,7 +129,11 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing Findomain: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Findomain - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -121,7 +144,11 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing AssetFinder: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing AssetFinder - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -132,7 +159,11 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing Subfinder: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Subfinder - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -143,7 +174,11 @@ const SubdomainEnumeration = async (req,res) => {
                                     })
                                     .catch((err)=> {
                                         console.log("Break Executing Gobuster: ", err);
-                                        fs.appendFileSync(logsDir, err);
+                                        fs.appendFileSync(logsDir,err+'\n');
+                                        return res.status(400).json({
+                                            ok: false,
+                                            msg: `Break Executing Gobuster - Review logs in ${logsDir}...`
+                                        });
                                     });
         }
 
@@ -154,7 +189,11 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing GitHub Subdomains: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing GitHub Subdomains - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -165,19 +204,28 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing AltDNS: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing AltDNS - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
         if(altdnsExecuted){
-            res.status(200).json({
+            return res.status(200).json({
                 ok:true,
                 msg: 'Complete Subdomain Enumeration Finish...'
             });
         }
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        console.log("Break Executing Subdomain Enumeration: ", err);
+        fs.appendFileSync(logsDir,err+'\n');
+        return res.status(400).json({
+            ok: false,
+            msg: `Error in Subdomain Enumeration - Review logs in ${logsDir}...`
+        });
     }
 };
 
@@ -192,7 +240,11 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing Findomain: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Findomain - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
     
@@ -203,7 +255,11 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing AssetFinder: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing AssetFinder - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -214,7 +270,11 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing Subfinder: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Subfinder - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
         
@@ -225,7 +285,11 @@ const ExecuteMonitoring = async (req,res) => {
                                         })
                                         .catch((err)=> {
                                             console.log("Break Executing GoBuster: ", err);
-                                            fs.appendFileSync(logsDir, err);
+                                            fs.appendFileSync(logsDir,err+'\n');
+                                            return res.status(400).json({
+                                                ok: false,
+                                                msg: `Break Executing GoBuster - Review logs in ${logsDir}...`
+                                            });
                                         });
         }
 
@@ -238,8 +302,12 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data 
                                             })
                                             .catch( err => { 
-                                                console.log("Break Saving new Subdomains: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                console.log("Break Saving New Subdomains: ", err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Saving New Subdomains - Review logs in ${logsDir}...`
+                                                });
                                             })
         }
 
@@ -251,7 +319,11 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch( err => { 
                                                 console.log("Break Executing Httprobe: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Httprobe - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -262,7 +334,11 @@ const ExecuteMonitoring = async (req,res) => {
                                         })
                                         .catch((err)=> {
                                             console.log("Break Executing Aquatone: ", err);
-                                            fs.appendFileSync(logsDir, err);
+                                            fs.appendFileSync(logsDir,err+'\n');
+                                            return res.status(400).json({
+                                                ok: false,
+                                                msg: `Break Executing Aquatone - Review logs in ${logsDir}...`
+                                            });
                                         });
         }
 
@@ -273,7 +349,11 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing JSSCanner: ", err);
-                                                fs.appendFileSync(logsDir, err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing JSSCanner - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -283,8 +363,12 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data
                                             })
                                             .catch(err => {
-                                                console.log("Break when executes DataConsumer: ", err);   
-                                                fs.appendFileSync(logsDir, err);
+                                                console.log("Break Executing DataConsumer: ", err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing DataConsumer - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -294,8 +378,12 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data
                                             })
                                             .catch(err => {
-                                                console.log("Break when executes Waybackurls: ", err);   
-                                                fs.appendFileSync(logsDir, err);
+                                                console.log("Break Executing Waybackurls: ", err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Waybackurls - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -305,8 +393,12 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data
                                             })
                                             .catch(err => {
-                                                console.log("Break when executes Dirsearch: ", err);   
-                                                fs.appendFileSync(logsDir, err);
+                                                console.log("Break Executing Dirsearch: ", err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Dirsearch - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
         
@@ -316,8 +408,12 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data
                                             })
                                             .catch(err => {
-                                                console.log("Break when executes Arjun: ", err);   
-                                                fs.appendFileSync(logsDir, err);
+                                                console.log("Break Executing Arjun: ", err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Arjun - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -328,8 +424,12 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data
                                             })
                                             .catch(err => {
-                                                console.log("Break when executes GoSpider: ", err);  
-                                                fs.appendFileSync(logsDir, err); 
+                                                console.log("Break Executing GoSpider: ", err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing GoSpider - Review logs in ${logsDir}...`
+                                                });
                                             });
         }
 
@@ -339,8 +439,12 @@ const ExecuteMonitoring = async (req,res) => {
                                             return data
                                         })
                                         .catch(err => {
-                                            console.log("Break when executes GetJs: ", err);  
-                                            fs.appendFileSync(logsDir, err);
+                                            console.log("Break Executing GetJS: ", err);
+                                            fs.appendFileSync(logsDir,err+'\n');
+                                            return res.status(400).json({
+                                                ok: false,
+                                                msg: `Break Executing GetJS - Review logs in ${logsDir}...`
+                                            });
                                         });
         }
 
@@ -352,7 +456,12 @@ const ExecuteMonitoring = async (req,res) => {
         }
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        console.log("Break Executing Monitoring: ", err);
+        fs.appendFileSync(logsDir,err+'\n');
+        return res.status(400).json({
+            ok: false,
+            msg: `Break Executing Monitoring - Review logs in ${logsDir}...`
+        });
     }
 };
 
@@ -388,7 +497,33 @@ function CreateAllDir(dir){
         return allDir;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
+    }
+}
+
+function CreateLogs(){
+    try{
+
+        const logsDir = `${resultDir}Logs/`;
+        const logsFile = `${logsDir}Logs-${date}.txt`;
+
+        if(fs.existsSync(logsDir)){
+            console.log('Logs Directory Exists.');
+        } else { 
+            shell.exec(`mkdir ${logsDir}`)
+        }
+
+        if(fs.existsSync(logsFile)){
+            console.log('Logs File Exists');
+        } else {
+            shell.exec(`>> ${logsFile}`);
+        }
+
+        return logsFile;
+    }
+    catch(err){
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -412,7 +547,7 @@ function CreateTodayDir(date){
         return todayDir;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -432,6 +567,7 @@ function CreateSubdomainsFile(dir){
         return defaultFile;
     }
     catch(err){
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -448,6 +584,7 @@ async function CreateAquatoneDir(todayDir){
         return aquatoneDir;
     }
     catch(err){
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -492,8 +629,8 @@ async function ExecuteFindomain(dir, enumeration){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
-        return false;
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
 }
 
@@ -529,8 +666,8 @@ async function ExecuteAssetfinder(dir, enumeration){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
-        return false;
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
 }
 
@@ -564,8 +701,8 @@ async function ExecuteSubfinder(dir, enumeration){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
-        return false;
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
 }
 
@@ -610,8 +747,8 @@ async function ExecuteGobusterDNS(dir,gobusterDict, enumeration){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
-        return false;
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
 }
 
@@ -655,8 +792,8 @@ async function ExecuteGitSubdomains(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
-        return false;
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
 }
 
@@ -700,8 +837,8 @@ async function ExecuteAltDNS(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
-        return false;
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
 }
 
@@ -736,9 +873,9 @@ async function SaveNewSubdomains(){
         await clientPool.query('COMMIT');
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
         await clientPool.query('ROLLBACK');
-        return false;
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
     finally{
         shell.exec(`cat ${newSubdomainsFile} >> ${allSubdomainsFile} | sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
@@ -759,7 +896,7 @@ async function ExecuteHttprobe(dir, file){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -782,7 +919,7 @@ async function ExecuteAquatone(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -864,6 +1001,7 @@ async function ExecuteDataConsumer(todayDir){
                 
             }
             catch(err){
+                fs.appendFileSync(logsDir,err+'\n');
                 return err;
             }
             
@@ -873,8 +1011,8 @@ async function ExecuteDataConsumer(todayDir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
-        return false;
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
     
 
@@ -892,7 +1030,7 @@ async function ExecuteJSScanner(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -911,7 +1049,7 @@ async function ExecuteWaybackurls(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -930,7 +1068,7 @@ async function ExecuteDirsearch(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -949,7 +1087,7 @@ async function ExecuteArjun(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -968,7 +1106,7 @@ async function ExecuteGoSpider(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -987,7 +1125,7 @@ async function ExecuteGetJs(dir){
         return true;
     }
     catch(err){
-        fs.appendFileSync(logsDir, err);
+        fs.appendFileSync(logsDir,err+'\n');
         return err;
     }
 }
@@ -996,13 +1134,21 @@ async function ExecuteGetJs(dir){
 //###############---SUBDOMAIN MONITORING FUNCTIONS---#############################
 //################################################################################
 
+//////////////////////////////////////////////////////////////////////////////////
+
 //################################################################################
 //########################---OTHER FUNCTIONS \+_+/---#############################
 //################################################################################
 
 function ExecuteApiKeys(){
-    shell.exec('chmod +x ./config/apikeys.sh');
-    shell.exec('./config/apikeys.sh');
+    try{
+        shell.exec('chmod +x ./config/apikeys.sh');
+        shell.exec('./config/apikeys.sh');
+    }
+    catch(err){
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
+    }
 }
 
 async function TxtSpliter(){
@@ -1117,8 +1263,10 @@ async function ExecuteSubdomainScan(latestSubdomainRows, todaySubdomainFile){
 //########################---OTHER FUNCTIONS \+_+/---#############################
 //################################################################################
 
+//////////////////////////////////////////////////////////////////////////////////
 
 module.exports = {
+    Welcome,
     SubdomainEnumeration,
     ExecuteMonitoring,
     test
