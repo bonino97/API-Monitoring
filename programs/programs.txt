@@ -420,3 +420,5 @@ githubapp.com
 semmle.com
 semmle.net
 downloads.lgtm.com
+uber.com
+uberinternal.com

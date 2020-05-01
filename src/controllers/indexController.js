@@ -27,7 +27,7 @@ const todayDir = CreateTodayDir(date);
 const allSubdomainsFile = CreateSubdomainsFile(allDir);
 const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
-const programsFile = `../programs/programs2.txt`;
+const programsFile = `../programs/programs.txt`;
 const goDir =`~/go/bin/`;
 
 //TOOLS
