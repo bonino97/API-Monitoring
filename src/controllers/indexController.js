@@ -24,10 +24,11 @@ const date = dateFormat(new Date(), "yyyy-mm-dd");
 const resultDir = `../MonitoringResults/`;
 const allDir = CreateAllDir(resultDir);
 const todayDir = CreateTodayDir(date);
+const logsDir = `${resultDir}Logs/Logs-${date}.txt`;
 const allSubdomainsFile = CreateSubdomainsFile(allDir);
 const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
-const programsFile = `../programs/programs2.txt`;
+const programsFile = `../programs/programs.txt`;
 const goDir =`~/go/bin/`;
 
 //TOOLS
@@ -86,7 +87,7 @@ const test = async (req,res) => {
         await clientPool.query('COMMIT');
     }
     catch(err){
-        console.log(err);   
+        fs.appendFileSync(logsDir, err);
         await clientPool.query('ROLLBACK');
         return false;
     }
@@ -109,6 +110,7 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing Findomain: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -119,6 +121,7 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing AssetFinder: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -129,6 +132,7 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing Subfinder: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -139,6 +143,7 @@ const SubdomainEnumeration = async (req,res) => {
                                     })
                                     .catch((err)=> {
                                         console.log("Break Executing Gobuster: ", err);
+                                        fs.appendFileSync(logsDir, err);
                                     });
         }
 
@@ -149,6 +154,7 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing GitHub Subdomains: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -159,6 +165,7 @@ const SubdomainEnumeration = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing AltDNS: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -170,7 +177,7 @@ const SubdomainEnumeration = async (req,res) => {
         }
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
     }
 };
 
@@ -185,6 +192,7 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing Findomain: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
     
@@ -195,6 +203,7 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing AssetFinder: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -205,6 +214,7 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing Subfinder: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
         
@@ -215,6 +225,7 @@ const ExecuteMonitoring = async (req,res) => {
                                         })
                                         .catch((err)=> {
                                             console.log("Break Executing GoBuster: ", err);
+                                            fs.appendFileSync(logsDir, err);
                                         });
         }
 
@@ -227,7 +238,8 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data 
                                             })
                                             .catch( err => { 
-                                                console.log("Break Saving new Subdomains: ", err) 
+                                                console.log("Break Saving new Subdomains: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             })
         }
 
@@ -238,7 +250,8 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data 
                                             })
                                             .catch( err => { 
-                                                console.log("Break Executing Httprobe: ", err) 
+                                                console.log("Break Executing Httprobe: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -249,6 +262,7 @@ const ExecuteMonitoring = async (req,res) => {
                                         })
                                         .catch((err)=> {
                                             console.log("Break Executing Aquatone: ", err);
+                                            fs.appendFileSync(logsDir, err);
                                         });
         }
 
@@ -259,6 +273,7 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch((err)=> {
                                                 console.log("Break Executing JSSCanner: ", err);
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -269,6 +284,7 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch(err => {
                                                 console.log("Break when executes DataConsumer: ", err);   
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -279,6 +295,7 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch(err => {
                                                 console.log("Break when executes Waybackurls: ", err);   
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -289,6 +306,7 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch(err => {
                                                 console.log("Break when executes Dirsearch: ", err);   
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
         
@@ -299,6 +317,7 @@ const ExecuteMonitoring = async (req,res) => {
                                             })
                                             .catch(err => {
                                                 console.log("Break when executes Arjun: ", err);   
+                                                fs.appendFileSync(logsDir, err);
                                             });
         }
 
@@ -309,7 +328,8 @@ const ExecuteMonitoring = async (req,res) => {
                                                 return data
                                             })
                                             .catch(err => {
-                                                console.log("Break when executes GoSpider: ", err);   
+                                                console.log("Break when executes GoSpider: ", err);  
+                                                fs.appendFileSync(logsDir, err); 
                                             });
         }
 
@@ -320,6 +340,7 @@ const ExecuteMonitoring = async (req,res) => {
                                         })
                                         .catch(err => {
                                             console.log("Break when executes GetJs: ", err);  
+                                            fs.appendFileSync(logsDir, err);
                                         });
         }
 
@@ -331,7 +352,7 @@ const ExecuteMonitoring = async (req,res) => {
         }
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
     }
 };
 
@@ -367,6 +388,7 @@ function CreateAllDir(dir){
         return allDir;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -390,6 +412,7 @@ function CreateTodayDir(date){
         return todayDir;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -469,7 +492,7 @@ async function ExecuteFindomain(dir, enumeration){
         return true;
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         return false;
     }
 }
@@ -506,7 +529,7 @@ async function ExecuteAssetfinder(dir, enumeration){
         return true;
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         return false;
     }
 }
@@ -541,7 +564,7 @@ async function ExecuteSubfinder(dir, enumeration){
         return true;
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         return false;
     }
 }
@@ -562,7 +585,7 @@ async function ExecuteGobusterDNS(dir,gobusterDict, enumeration){
 
         fs.appendFileSync(gobusterFile, '', (err) => {
             if (err) {
-                return console.log(err);
+                return fs.appendFileSync(logsDir, err);
             }
         });
 
@@ -587,7 +610,7 @@ async function ExecuteGobusterDNS(dir,gobusterDict, enumeration){
         return true;
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         return false;
     }
 }
@@ -609,7 +632,7 @@ async function ExecuteGitSubdomains(dir){
 
         fs.appendFileSync(gitTxt, '', (err) => {
             if (err) {
-                return console.log(err);
+                return fs.appendFileSync(logsDir, err);
             }
         });
 
@@ -632,7 +655,7 @@ async function ExecuteGitSubdomains(dir){
         return true;
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         return false;
     }
 }
@@ -677,7 +700,7 @@ async function ExecuteAltDNS(dir){
         return true;
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         return false;
     }
 }
@@ -713,7 +736,7 @@ async function SaveNewSubdomains(){
         await clientPool.query('COMMIT');
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         await clientPool.query('ROLLBACK');
         return false;
     }
@@ -736,6 +759,7 @@ async function ExecuteHttprobe(dir, file){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -758,6 +782,7 @@ async function ExecuteAquatone(dir){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -848,7 +873,7 @@ async function ExecuteDataConsumer(todayDir){
         return true;
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         return false;
     }
     
@@ -867,6 +892,7 @@ async function ExecuteJSScanner(dir){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -885,6 +911,7 @@ async function ExecuteWaybackurls(dir){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -903,6 +930,7 @@ async function ExecuteDirsearch(dir){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -921,6 +949,7 @@ async function ExecuteArjun(dir){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -939,6 +968,7 @@ async function ExecuteGoSpider(dir){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -957,6 +987,7 @@ async function ExecuteGetJs(dir){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -991,7 +1022,7 @@ async function TxtSpliter(){
         fs.appendFileSync(pathNew, dataTxt+'\n', (err) => {
             
             if (err) {
-                return console.log(err);
+                return fs.appendFileSync(logsDir, err);
             }
         });
         
@@ -1008,7 +1039,7 @@ async function SelectUrls(){
         cursor.read(4000000, async (err,row) => {
 
             if(err){
-                console.log(err);
+                fs.appendFileSync(logsDir, err);
             }
 
             cursor.close(() => {
@@ -1020,7 +1051,7 @@ async function SelectUrls(){
 
     }
     catch(err){
-        console.log(err);
+        fs.appendFileSync(logsDir, err);
         return false;
     }
     finally{
@@ -1038,7 +1069,7 @@ async function ExecuteAllSubdomainsScan(allSubdomainsRows, allSubdomainsFile){
             fs.appendFileSync(allSubdomainsFile, element.name+'\n', (err) => {
                 
                 if (err) {
-                    return console.log(err);
+                    return fs.appendFileSync(logsDir, err);
                 }
     
             });
@@ -1051,6 +1082,7 @@ async function ExecuteAllSubdomainsScan(allSubdomainsRows, allSubdomainsFile){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
@@ -1063,7 +1095,7 @@ async function ExecuteSubdomainScan(latestSubdomainRows, todaySubdomainFile){
             fs.appendFileSync(todaySubdomainFile, element.name+'\n', (err) => {
                 
                 if (err) {
-                    return console.log(err);
+                    return fs.appendFileSync(logsDir, err);
                 }
     
             });
@@ -1076,6 +1108,7 @@ async function ExecuteSubdomainScan(latestSubdomainRows, todaySubdomainFile){
         return true;
     }
     catch(err){
+        fs.appendFileSync(logsDir, err);
         return err;
     }
 }
