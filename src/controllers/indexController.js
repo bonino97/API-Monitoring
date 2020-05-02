@@ -25,7 +25,6 @@ const resultDir = `../MonitoringResults/`;
 const allDir = CreateAllDir(resultDir);
 
 const logsDir = CreateLogs();
-
 const allSubdomainsFile = CreateSubdomainsFile(allDir);
 
 
@@ -119,6 +118,9 @@ const Welcome = async(req,res) => {
 };
 
 const SubdomainEnumeration = async (req,res) => {
+    
+    const logsDir = CreateLogs();
+
     try{
 
         const todayDir = CreateTodayDir(date);
@@ -232,6 +234,9 @@ const SubdomainEnumeration = async (req,res) => {
 };
 
 const ExecuteMonitoring = async (req,res) => {
+    
+    const logsDir = CreateLogs();
+
     try{
 
         const todayDir = CreateTodayDir(date);
