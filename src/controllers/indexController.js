@@ -23,12 +23,11 @@ const date = dateFormat(new Date(), "yyyy-mm-dd");
 //DIR & FILES
 const resultDir = `../MonitoringResults/`;
 const allDir = CreateAllDir(resultDir);
-const todayDir = CreateTodayDir(date);
+
 const logsDir = CreateLogs();
-console.log(logsDir);
 
 const allSubdomainsFile = CreateSubdomainsFile(allDir);
-const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
+
 
 const programsFile = `../programs/programs.txt`;
 const goDir =`~/go/bin/`;
@@ -122,8 +121,11 @@ const Welcome = async(req,res) => {
 const SubdomainEnumeration = async (req,res) => {
     try{
 
+        const todayDir = CreateTodayDir(date);
+        const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
+
         if(allDir){
-            var findomainExecuted = await ExecuteFindomain(allDir, true)
+            var findomainExecuted = await ExecuteFindomain(allDir, true, newSubdomainsFile)
                                             .then (data => {
                                                 return data
                                             })
@@ -138,7 +140,7 @@ const SubdomainEnumeration = async (req,res) => {
         }
 
         if(findomainExecuted){
-            var assetfinderExecuted = await ExecuteAssetfinder(allDir, true)
+            var assetfinderExecuted = await ExecuteAssetfinder(allDir, true, newSubdomainsFile)
                                             .then (data => {
                                                 return data
                                             })
@@ -153,7 +155,7 @@ const SubdomainEnumeration = async (req,res) => {
         }
 
         if(assetfinderExecuted){
-            var subfinderExecuted = await ExecuteSubfinder(allDir, true)
+            var subfinderExecuted = await ExecuteSubfinder(allDir, true, newSubdomainsFile)
                                             .then (data => {
                                                 return data
                                             })
@@ -168,7 +170,7 @@ const SubdomainEnumeration = async (req,res) => {
         }
 
         if(subfinderExecuted){
-            var gobusterExecuted = await ExecuteGobusterDNS(allDir, dnsBigDict, true)
+            var gobusterExecuted = await ExecuteGobusterDNS(allDir, dnsBigDict, true, newSubdomainsFile)
                                     .then (data => {
                                         return data
                                     })
@@ -183,7 +185,7 @@ const SubdomainEnumeration = async (req,res) => {
         }
 
         if(gobusterExecuted){
-            var gitSubExecuted = await ExecuteGitSubdomains(allDir)
+            var gitSubExecuted = await ExecuteGitSubdomains(allDir, newSubdomainsFile)
                                             .then (data => {
                                                 return data
                                             })
@@ -198,7 +200,7 @@ const SubdomainEnumeration = async (req,res) => {
         }
 
         if(gitSubExecuted){
-            var altdnsExecuted = await ExecuteAltDNS(allDir)
+            var altdnsExecuted = await ExecuteAltDNS(allDir, newSubdomainsFile)
                                             .then (data => {
                                                 return data
                                             })
@@ -232,9 +234,12 @@ const SubdomainEnumeration = async (req,res) => {
 const ExecuteMonitoring = async (req,res) => {
     try{
 
+        const todayDir = CreateTodayDir(date);
+        const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
+
         if(todayDir){
 
-            var findomainExecuted = await ExecuteFindomain(todayDir, false)
+            var findomainExecuted = await ExecuteFindomain(todayDir, false, newSubdomainsFile)
                                             .then (data => {
                                                 return data
                                             })
@@ -249,7 +254,7 @@ const ExecuteMonitoring = async (req,res) => {
         }
     
         if(findomainExecuted){
-            var assetfinderExecuted = await ExecuteAssetfinder(todayDir, false)
+            var assetfinderExecuted = await ExecuteAssetfinder(todayDir, false, newSubdomainsFile)
                                             .then (data => {
                                                 return data
                                             })
@@ -264,7 +269,7 @@ const ExecuteMonitoring = async (req,res) => {
         }
 
         if(assetfinderExecuted){
-            var subfinderExecuted = await ExecuteSubfinder(todayDir, false)
+            var subfinderExecuted = await ExecuteSubfinder(todayDir, false, newSubdomainsFile)
                                             .then (data => {
                                                 return data
                                             })
@@ -279,7 +284,7 @@ const ExecuteMonitoring = async (req,res) => {
         }
         
         if(subfinderExecuted){
-            var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false)
+            var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false, newSubdomainsFile)
                                         .then (data => {
                                             return data
                                         })
@@ -599,7 +604,7 @@ async function CreateAquatoneDir(todayDir){
 //###############---SUBDOMAIN ENUMERATION FUNCTIONS---############################
 //################################################################################
 
-async function ExecuteFindomain(dir, enumeration){
+async function ExecuteFindomain(dir, enumeration, newSubdomainsFile){
     try {
 
         const findomainFile = `${dir}FindomainDomains.txt`;
@@ -634,7 +639,7 @@ async function ExecuteFindomain(dir, enumeration){
     }
 }
 
-async function ExecuteAssetfinder(dir, enumeration){
+async function ExecuteAssetfinder(dir, enumeration, newSubdomainsFile){
     try {
 
         const assetfinderFile = `${dir}AssetFinderDomains.txt`;
@@ -671,7 +676,7 @@ async function ExecuteAssetfinder(dir, enumeration){
     }
 }
 
-async function ExecuteSubfinder(dir, enumeration){
+async function ExecuteSubfinder(dir, enumeration, newSubdomainsFile){
     try {
         
         const subfinderFile = `${dir}/SubfinderDomains.txt`;
@@ -706,7 +711,7 @@ async function ExecuteSubfinder(dir, enumeration){
     }
 }
 
-async function ExecuteGobusterDNS(dir,gobusterDict, enumeration){
+async function ExecuteGobusterDNS(dir,gobusterDict, enumeration, newSubdomainsFile){
     try {
         const data = fs.readFileSync(programsFile, 'UTF-8');
         const dataArr = data.split('\n');
@@ -752,7 +757,7 @@ async function ExecuteGobusterDNS(dir,gobusterDict, enumeration){
     }
 }
 
-async function ExecuteGitSubdomains(dir){
+async function ExecuteGitSubdomains(dir, newSubdomainsFile){
     try {
         
         const data = fs.readFileSync(programsFile, 'UTF-8');
@@ -797,7 +802,7 @@ async function ExecuteGitSubdomains(dir){
     }
 }
 
-async function ExecuteAltDNS(dir){   
+async function ExecuteAltDNS(dir, newSubdomainsFile){   
     try {
 
         const altdnsFile = `${dir}AltdnsDomains.txt`;
