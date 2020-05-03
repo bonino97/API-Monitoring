@@ -1,12 +1,7 @@
 #!/bin/bash
-
-echo "Facebook API Key"                                                                                                 
 export findomain_fb_token="636867740443073|P8-mddEno6zbjHrN5beEKLgZP2Y"
-
-echo "VirusTotal API Key"
 export findomain_virustotal_token="4a4cbb62ef682d82998d241edd5797a4790ad977cce2302dba124d70dccd5693"
-
-echo "SecurityTrails API Key" 
 export findomain_securitytrails_token="SZYVBsbnVl6ms5vTiGiMBO|eyDCZTGKwz"
+export CENSYS_API_SECRET="air2JubiuJCUOAjkNBwUwAodKemk5c4o"
+export CENSYS_API_ID="6058c391-40d9-4049-9de6-ad42158190cb"
 
-echo "Censys API Key"

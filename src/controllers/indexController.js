@@ -234,11 +234,10 @@ const SubdomainEnumeration = async (req,res) => {
 const ExecuteMonitoring = async (req,res) => {
     
     const logsDir = CreateLogs();
+    const todayDir = CreateTodayDir(date);
+    const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
     try{
-
-        const todayDir = CreateTodayDir(date);
-        const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
         if(todayDir){
 
@@ -623,11 +622,11 @@ async function ExecuteFindomain(dir, enumeration, newSubdomainsFile){
         shell.exec(`findomain -f ${programsFile} -u ${findomainFile}`);
 
         if(enumeration){
-            shell.exec(`grep -xvf ${allSubdomainsFile} ${findomainFile} >> ${newSubdomainsFile}`);
+            shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${findomainFile} >> ${newSubdomainsFile}`);
             shell.exec(`sed 's/Found: //g' ${findomainFile} >> ${allSubdomainsFile}`);
             shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`); //Removing duplicate entries.
         } else {
-            shell.exec(`grep -xvf ${allSubdomainsFile} ${findomainFile} >> ${newSubdomainsFile}`);
+            shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${findomainFile} >> ${newSubdomainsFile}`);
         }
 
         console.log('############################################################################################');
@@ -658,11 +657,11 @@ async function ExecuteAssetfinder(dir, enumeration, newSubdomainsFile){
         shell.exec(`cat ${programsFile} | ${assetfinderTool} --subs-only | tee -a ${assetfinderFile}`);
 
         if(enumeration){
-            shell.exec(`grep -xvf ${allSubdomainsFile} ${assetfinderFile} >> ${newSubdomainsFile}`);
+            shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${assetfinderFile} >> ${newSubdomainsFile}`);
             shell.exec(`sed 's/Found: //g' ${assetfinderFile} >> ${allSubdomainsFile}`);
             shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
         } else {
-            shell.exec(`grep -xvf ${allSubdomainsFile} ${assetfinderFile} >> ${newSubdomainsFile}`);
+            shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${assetfinderFile} >> ${newSubdomainsFile}`);
         }
 
 
@@ -695,11 +694,11 @@ async function ExecuteSubfinder(dir, enumeration, newSubdomainsFile){
         shell.exec(`subfinder -dL ${programsFile} -o ${subfinderFile}`);
 
         if(enumeration){
-            shell.exec(`grep -xvf ${allSubdomainsFile} ${subfinderFile} >> ${newSubdomainsFile}`);
+            shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${subfinderFile} >> ${newSubdomainsFile}`);
             shell.exec(`sed 's/Found: //g' ${subfinderFile} >> ${allSubdomainsFile}`);
             shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
         } else {
-            shell.exec(`grep -xvf ${allSubdomainsFile} ${subfinderFile} >> ${newSubdomainsFile}`);
+            shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${subfinderFile} >> ${newSubdomainsFile}`);
         }
 
         console.log('############################################################################################');
@@ -741,11 +740,11 @@ async function ExecuteGobusterDNS(dir,gobusterDict, enumeration, newSubdomainsFi
         });
 
         if(enumeration){
-            shell.exec(`grep -xvf ${allSubdomainsFile} ${gobusterFile} >> ${newSubdomainsFile}`);
+            shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${gobusterFile} >> ${newSubdomainsFile}`);
             shell.exec(`sed 's/Found: //g' ${gobusterFile} >> ${allSubdomainsFile}`);
             shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
         } else {
-            shell.exec(`grep -xvf ${allSubdomainsFile} ${gobusterFile} >> ${newSubdomainsFile}`);
+            shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${gobusterFile} >> ${newSubdomainsFile}`);
         }
 
         console.log('############################################################################################');
@@ -787,7 +786,7 @@ async function ExecuteGitSubdomains(dir, newSubdomainsFile){
             shell.exec(`rm -r ${dir}AuxGitSubdomains.txt`);
         });
 
-        shell.exec(`grep -xvf ${allSubdomainsFile} ${gitTxt} >> ${newSubdomainsFile}`);
+        shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${gitTxt} >> ${newSubdomainsFile}`);
         shell.exec(`sed 's/Found: //g' ${gitTxt} >> ${allSubdomainsFile}`);
         shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`);
 
@@ -834,7 +833,7 @@ async function ExecuteAltDNS(dir, newSubdomainsFile){
         shell.exec(`rm -r ${altdnsFileAux}`);
         shell.exec(`rm -r ${permAltdnsFile}`);
 
-        shell.exec(`grep -xvf ${allSubdomainsFile} ${altdnsFile} >> ${newSubdomainsFile}`);
+        shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${altdnsFile} >> ${newSubdomainsFile}`);
         shell.exec(`sed 's/Found: //g' ${altdnsFile} >> ${allSubdomainsFile}`);
         shell.exec(`sort -u ${allSubdomainsFile} -o ${allSubdomainsFile}`); //Removing duplicate entries.
 
