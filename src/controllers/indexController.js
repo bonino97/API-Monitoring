@@ -26,18 +26,20 @@ const allDir = CreateAllDir(resultDir);
 const logsDir = CreateLogs();
 const allSubdomainsFile = CreateSubdomainsFile(allDir);
 
-
 const programsFile = `../programs/programs.txt`;
 const goDir =`~/go/bin/`;
 
 //TOOLS
-const assetfinderTool = `~/go/bin/assetfinder`;
+
 const gitTool = `python3 ~/tools/github-search/github-subdomains.py`;
-const waybackTool = `${goDir}waybackurls`;
 const dirsearchTool = `python3 ~/tools/dirsearch/dirsearch.py`;
 const arjunTool = `python3 ~/tools/Arjun/arjun.py`;
+
+const subjackTool = `${goDir}subjack`;
 const gospiderTool = `${goDir}gospider`;
 const getjsTool = `${goDir}getJS`;
+const assetfinderTool = `${goDir}assetfinder`;
+const waybackTool = `${goDir}waybackurls`;
 
 //TOKEN & APIKEYS. 
 const gitToken = `dcef34578292f6c0cd1922d2cd1fa8146755b0ea`;
@@ -227,6 +229,46 @@ const SubdomainEnumeration = async (req,res) => {
         return res.status(400).json({
             ok: false,
             msg: `Error in Subdomain Enumeration - Review logs in ${logsDir}...`
+        });
+    }
+};
+
+const SubdomainTakeover = async (req,res) => {
+
+    const todayDir = CreateTodayDir(date);
+    const logsDir = CreateLogs();
+
+    try{
+
+        if(todayDir){
+
+            var subjackExecuted = await ExecuteSubjack(todayDir)
+                                            .then (data => {
+                                                return data
+                                            })
+                                            .catch((err)=> {
+                                                console.log("Break Executing Subjack: ", err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Subjack - Review logs in ${logsDir}...`
+                                                });
+                                            });
+        }
+
+        if(subjackExecuted){
+            return res.status(200).json({
+                ok:true,
+                msg: 'Complete Subdomain Enumeration Finish...'
+            });
+        }
+    }
+    catch(err){
+        console.log("Break Executing Subdomain Takeover: ", err);
+        fs.appendFileSync(logsDir,err+'\n');
+        return res.status(400).json({
+            ok: false,
+            msg: `Break Executing Subdomain Takeover - Review logs in ${logsDir}...`
         });
     }
 };
@@ -456,7 +498,7 @@ const ExecuteMonitoring = async (req,res) => {
         }
 
         if(getjsExecuted){
-            res.status(200).json({
+            return res.status(200).json({
                 ok:true,
                 msg: 'Complete Subdomain Enumeration Finish...'
             });
@@ -471,6 +513,7 @@ const ExecuteMonitoring = async (req,res) => {
         });
     }
 };
+
 
 //################################################################################
 //##############################---ENDPOINTS---###################################
@@ -934,7 +977,7 @@ async function ExecuteAquatone(dir){
 async function ExecuteDataConsumer(todayDir){
 
     try {
-        var path = `${todayDir}/Aquatone/aquatone_session.json`;
+        var path = `${todayDir}Aquatone/aquatone_session.json`;
 
     
         const aquatoneJson = fs.readFileSync(path, 'utf8');
@@ -1144,6 +1187,34 @@ async function ExecuteGetJs(dir){
 //////////////////////////////////////////////////////////////////////////////////
 
 //################################################################################
+//###############---SUBDOMAIN TAKEOVER FUNCTION---################################
+//################################################################################
+
+async function ExecuteSubjack(dir){
+    try {
+        let subjackDir = `${dir}Subjack.txt`;
+        let syntax = `~/go/bin/subjack -w ${allSubdomainsFile} -ssl -t 75 -timeout 15 -o ${subjackDir} -c ~/go/src/github.com/haccer/subjack/fingerprints.json`;
+
+        console.log('Executing Subjack');
+        shell.exec(syntax);
+        shell.exec(`sed '/github.com/d;/statuspage.io/d' -i ${subjackDir}`);
+        console.log('Subjack Finish!');
+
+        return true;
+    }
+    catch(err){
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
+    }
+}
+
+//################################################################################
+//###############---SUBDOMAIN TAKEOVER FUNCTION---################################
+//################################################################################
+
+//////////////////////////////////////////////////////////////////////////////////
+
+//################################################################################
 //########################---OTHER FUNCTIONS \+_+/---#############################
 //################################################################################
 
@@ -1276,5 +1347,6 @@ module.exports = {
     Welcome,
     SubdomainEnumeration,
     ExecuteMonitoring,
+    SubdomainTakeover,
     test
 }
