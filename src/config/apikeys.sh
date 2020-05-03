@@ -8,3 +8,5 @@ export findomain_virustotal_token="4a4cbb62ef682d82998d241edd5797a4790ad977cce23
 
 echo "SecurityTrails API Key" 
 export findomain_securitytrails_token="SZYVBsbnVl6ms5vTiGiMBO|eyDCZTGKwz"
+
+echo "Censys API Key"

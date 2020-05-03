@@ -19,7 +19,6 @@ const MonitoringDB = require('../config/monitoring-db');
 //CONSTANTS
 const date = dateFormat(new Date(), "yyyy-mm-dd");
 
-
 //DIR & FILES
 const resultDir = `../MonitoringResults/`;
 const allDir = CreateAllDir(resultDir);
@@ -32,7 +31,6 @@ const programsFile = `../programs/programs.txt`;
 const goDir =`~/go/bin/`;
 
 //TOOLS
-
 const assetfinderTool = `~/go/bin/assetfinder`;
 const gitTool = `python3 ~/tools/github-search/github-subdomains.py`;
 const waybackTool = `${goDir}waybackurls`;
@@ -307,7 +305,7 @@ const ExecuteMonitoring = async (req,res) => {
 
             shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
 
-            var saveNewSubExecuted = await SaveNewSubdomains()                                            
+            var saveNewSubExecuted = await SaveNewSubdomains(newSubdomainsFile)                                            
                                             .then ( data => { 
                                                 return data 
                                             })
@@ -866,7 +864,7 @@ async function ExecuteAltDNS(dir, newSubdomainsFile){
 //###############---SUBDOMAIN MONITORING FUNCTIONS---#############################
 //################################################################################
 
-async function SaveNewSubdomains(){
+async function SaveNewSubdomains(newSubdomainsFile){
     
     const clientPool = await monitPool.connect();
     const newSubFile = fs.readFileSync(newSubdomainsFile, 'UTF-8');
@@ -897,7 +895,7 @@ async function SaveNewSubdomains(){
 async function ExecuteHttprobe(dir, file){
     try {
         
-        shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`); //REMOVE DUPLICATE ENTRIES IN NEW SUBDOMAINS.
+        shell.exec(`sort -u ${file} -o ${file}`); //REMOVE DUPLICATE ENTRIES IN NEW SUBDOMAINS.
 
         console.log('Discovering alive domains!');
 
