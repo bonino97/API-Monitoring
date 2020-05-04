@@ -341,9 +341,6 @@ const ExecuteMonitoring = async (req,res) => {
                                             });
                                         });
         }
-    
-        let gobusterExecuted = true;
-
 
         if(gobusterExecuted){
 
