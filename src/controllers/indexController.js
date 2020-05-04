@@ -34,6 +34,7 @@ const goDir =`~/go/bin/`;
 const gitTool = `python3 ~/tools/github-search/github-subdomains.py`;
 const dirsearchTool = `python3 ~/tools/dirsearch/dirsearch.py`;
 const arjunTool = `python3 ~/tools/Arjun/arjun.py`;
+const zileTool = `python3 ~/tools/new-zile/zile.py`;
 
 const subjackTool = `${goDir}subjack`;
 const gospiderTool = `${goDir}gospider`;
@@ -498,6 +499,21 @@ const ExecuteMonitoring = async (req,res) => {
         }
 
         if(getjsExecuted){
+            var zileExecuted = await ExecuteZile(todayDir)
+                                        .then(data => {
+                                            return data
+                                        })
+                                        .catch(err => {
+                                            console.log("Break Executing Zile: ", err);
+                                            fs.appendFileSync(logsDir,err+'\n');
+                                            return res.status(400).json({
+                                                ok: false,
+                                                msg: `Break Executing Zile - Review logs in ${logsDir}...`
+                                            });
+                                        });
+        }
+
+        if(zileExecuted){
             return res.status(200).json({
                 ok:true,
                 msg: 'Complete Subdomain Enumeration Finish...'
@@ -1085,12 +1101,38 @@ async function ExecuteJSScanner(dir){
 
 async function ExecuteWaybackurls(dir){
     try {
+        var waybackDir = `${dir}Waybacks/`;
+        var waybackFile = `${waybackDir}Waybackurls.txt`;
+        var syntax = `cat ${dir}Alive.txt | ${waybackTool} >> ${waybackFile}`;
 
-        let syntax = `cat ${dir}Alive.txt | ${waybackTool} >> ${dir}Waybackurls.txt`;
+        if(fs.existsSync(dir)){
+            shell.exec(`mkdir ${waybackDir}`);
+        } 
 
         console.log('Searching Waybackurls!');
 
         shell.exec(syntax);
+
+        if(fs.existsSync(waybackFile)){
+            shell.exec(`sort -u ${waybackFile} -o ${waybackFile}`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "url=" > ${waybackDir}UrlParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "return_to=" > ${waybackDir}ReturnToParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "dest=" > ${waybackDir}DestParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "data=" > ${waybackDir}DataParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "domain=" > ${waybackDir}DomainParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "site=" > ${waybackDir}SiteParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "dir=" > ${waybackDir}DirParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "document=" > ${waybackDir}DocumentParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "root=" > ${waybackDir}RootParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "path=" > ${waybackDir}PathParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "folder=" > ${waybackDir}FolderParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "port=" > ${waybackDir}PortParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "result=" > ${waybackDir}ResultParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "host=" > ${waybackDir}HostParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "page=" > ${waybackDir}PageParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "file=" > ${waybackDir}FileParams.txt`);
+            shell.exec(`cat ${waybackFile} | sort -u | grep "redirect=" > ${waybackDir}RedirectParams.txt`);
+        }
 
         console.log('Waybackurls Finish!');
 
@@ -1181,9 +1223,37 @@ async function ExecuteGetJs(dir){
 async function ExecuteZile(dir){
     try {
 
+        let getJsFile = `${dir}GetJS.txt`;
+        let dirsearchFile = `${dir}Dirsearch.txt`;
+        let waybackFile = `${dir}Waybacks/Waybackurls.txt`;
+        let aliveFile = `${dir}Alive.txt`;
+        let zileFile = `${dir}Zile.txt`;
+
+        if(fs.existsSync(waybackFile)){
+            shell.exec(`cat ${waybackFile} >> ${zileFile}`);
+        }
+
+        if(fs.existsSync(aliveFile)){
+            shell.exec(`cat ${aliveFile} >> ${zileFile}`);
+        }
+
+        if(fs.existsSync(dirsearchFile)){
+            shell.exec(`cat ${dirsearchFile} >> ${zileFile}`);
+        }
+
+        if(fs.existsSync(getJsFile)){
+            shell.exec(`cat ${getJsFile} >> ${zileFile}`);
+        }
+
+        shell.exec(`sort -u ${zileFile} -o ${zileFile}`);
+
+        shell.exec(`cat ${zileFile} | ${zileTool} --request | tee -a ${dir}APIKeys.txt`);
+
+        return true;
     }
     catch(err){
-
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
     }
 }
 
@@ -1200,7 +1270,7 @@ async function ExecuteZile(dir){
 async function ExecuteSubjack(dir){
     try {
         let subjackDir = `${dir}Subjack.txt`;
-        let syntax = `~/go/bin/subjack -w ${allSubdomainsFile} -ssl -t 75 -timeout 15 -o ${subjackDir} -c ~/go/src/github.com/haccer/subjack/fingerprints.json`;
+        let syntax = `${subjackTool} -w ${allSubdomainsFile} -ssl -t 75 -timeout 15 -o ${subjackDir} -c ~/go/src/github.com/haccer/subjack/fingerprints.json`;
 
         console.log('Executing Subjack');
         shell.exec(syntax);
