@@ -312,20 +312,20 @@ const ExecuteMonitoring = async (req,res) => {
                                             });
         }
 
-        if(assetfinderExecuted){
-            var subfinderExecuted = await ExecuteSubfinder(todayDir, false, newSubdomainsFile)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break Executing Subfinder: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing Subfinder - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(assetfinderExecuted){
+        //     var subfinderExecuted = await ExecuteSubfinder(todayDir, false, newSubdomainsFile)
+        //                                     .then (data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch((err)=> {
+        //                                         console.log("Break Executing Subfinder: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing Subfinder - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
         
         // if(subfinderExecuted){
         //     var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false, newSubdomainsFile)
@@ -342,7 +342,7 @@ const ExecuteMonitoring = async (req,res) => {
         //                                 });
         // }
 
-        if(subfinderExecuted){
+        if(assetfinderExecuted){
 
             shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
 
