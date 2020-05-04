@@ -327,22 +327,22 @@ const ExecuteMonitoring = async (req,res) => {
                                             });
         }
         
-        if(subfinderExecuted){
-            var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false, newSubdomainsFile)
-                                        .then (data => {
-                                            return data
-                                        })
-                                        .catch((err)=> {
-                                            console.log("Break Executing GoBuster: ", err);
-                                            fs.appendFileSync(logsDir,err+'\n');
-                                            return res.status(400).json({
-                                                ok: false,
-                                                msg: `Break Executing GoBuster - Review logs in ${logsDir}...`
-                                            });
-                                        });
-        }
+        // if(subfinderExecuted){
+        //     var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false, newSubdomainsFile)
+        //                                 .then (data => {
+        //                                     return data
+        //                                 })
+        //                                 .catch((err)=> {
+        //                                     console.log("Break Executing GoBuster: ", err);
+        //                                     fs.appendFileSync(logsDir,err+'\n');
+        //                                     return res.status(400).json({
+        //                                         ok: false,
+        //                                         msg: `Break Executing GoBuster - Review logs in ${logsDir}...`
+        //                                     });
+        //                                 });
+        // }
 
-        if(gobusterExecuted){
+        if(subfinderExecuted){
 
             shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
 
