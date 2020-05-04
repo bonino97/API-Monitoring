@@ -312,20 +312,20 @@ const ExecuteMonitoring = async (req,res) => {
                                             });
         }
 
-        // if(assetfinderExecuted){
-        //     var subfinderExecuted = await ExecuteSubfinder(todayDir, false, newSubdomainsFile)
-        //                                     .then (data => {
-        //                                         return data
-        //                                     })
-        //                                     .catch((err)=> {
-        //                                         console.log("Break Executing Subfinder: ", err);
-        //                                         fs.appendFileSync(logsDir,err+'\n');
-        //                                         return res.status(400).json({
-        //                                             ok: false,
-        //                                             msg: `Break Executing Subfinder - Review logs in ${logsDir}...`
-        //                                         });
-        //                                     });
-        // }
+        if(assetfinderExecuted){
+            var subfinderExecuted = await ExecuteSubfinder(todayDir, false, newSubdomainsFile)
+                                            .then (data => {
+                                                return data
+                                            })
+                                            .catch((err)=> {
+                                                console.log("Break Executing Subfinder: ", err);
+                                                fs.appendFileSync(logsDir,err+'\n');
+                                                return res.status(400).json({
+                                                    ok: false,
+                                                    msg: `Break Executing Subfinder - Review logs in ${logsDir}...`
+                                                });
+                                            });
+        }
         
         // if(subfinderExecuted){
         //     var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false, newSubdomainsFile)
@@ -342,7 +342,7 @@ const ExecuteMonitoring = async (req,res) => {
         //                                 });
         // }
 
-        if(assetfinderExecuted){
+        if(subfinderExecuted){
 
             shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
 
@@ -734,7 +734,7 @@ async function ExecuteSubfinder(dir, enumeration, newSubdomainsFile){
         console.log('###############################---Subfinder Started---######################################');
         console.log('############################################################################################');
 
-        shell.exec(`subfinder -dL ${programsFile} -o ${subfinderFile}`);
+        shell.exec(`subfinder -dL ${programsFile} -t 65 -timeout 15 -o ${subfinderFile}`);
 
         if(enumeration){
             shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${subfinderFile} >> ${newSubdomainsFile}`);
@@ -892,8 +892,6 @@ async function ExecuteAltDNS(dir, newSubdomainsFile){
     }
 }
 
-
-
 //################################################################################
 //###############---SUBDOMAIN ENUMERATION FUNCTIONS---############################
 //################################################################################
@@ -960,7 +958,7 @@ async function ExecuteAquatone(dir){
                                         return err;
                                     });
 
-        let syntax = `cat ${dir}/Alive.txt | ~/go/bin/aquatone -ports large -out ${aquatoneDir}`;
+        let syntax = `cat ${dir}/Alive.txt | ~/go/bin/aquatone -screenshot-timeout 10 -out ${aquatoneDir}`;
 
         console.log('Screenshoting Alive Domains!');
 
@@ -1177,6 +1175,15 @@ async function ExecuteGetJs(dir){
     catch(err){
         fs.appendFileSync(logsDir,err+'\n');
         return err;
+    }
+}
+
+async function ExecuteZile(dir){
+    try {
+
+    }
+    catch(err){
+
     }
 }
 
