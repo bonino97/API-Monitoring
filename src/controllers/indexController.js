@@ -41,6 +41,7 @@ const gospiderTool = `${goDir}gospider`;
 const getjsTool = `${goDir}getJS`;
 const assetfinderTool = `${goDir}assetfinder`;
 const waybackTool = `${goDir}waybackurls`;
+const hakrawlerTool = `${goDir}hakrawler`;
 
 //TOKEN & APIKEYS. 
 const gitToken = `dcef34578292f6c0cd1922d2cd1fa8146755b0ea`;
@@ -452,22 +453,22 @@ const ExecuteMonitoring = async (req,res) => {
                                             });
         }
         
-        if(dirsearchExecuted){
-            var arjunExecuted = await ExecuteArjun(todayDir)
-                                            .then(data => {
-                                                return data
-                                            })
-                                            .catch(err => {
-                                                console.log("Break Executing Arjun: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing Arjun - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(dirsearchExecuted){
+        //     var arjunExecuted = await ExecuteArjun(todayDir)
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break Executing Arjun: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing Arjun - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
 
-        if(arjunExecuted){
+        if(dirsearchExecuted){
 
             var gospiderExecuted = await ExecuteGoSpider(todayDir)
                                             .then(data => {
@@ -499,18 +500,33 @@ const ExecuteMonitoring = async (req,res) => {
         }
 
         if(getjsExecuted){
-            var zileExecuted = await ExecuteZile(todayDir)
+            var hakrawlerExecuted = await ExecuteHakrawler(todayDir)
                                         .then(data => {
                                             return data
                                         })
                                         .catch(err => {
-                                            console.log("Break Executing Zile: ", err);
+                                            console.log("Break Executing Hakrawler: ", err);
                                             fs.appendFileSync(logsDir,err+'\n');
                                             return res.status(400).json({
                                                 ok: false,
                                                 msg: `Break Executing Zile - Review logs in ${logsDir}...`
                                             });
                                         });
+        }
+
+        if(hakrawlerExecuted){
+            var zileExecuted = await ExecuteZile(todayDir)
+            .then(data => {
+                return data
+            })
+            .catch(err => {
+                console.log("Break Executing Zile: ", err);
+                fs.appendFileSync(logsDir,err+'\n');
+                return res.status(400).json({
+                    ok: false,
+                    msg: `Break Executing Zile - Review logs in ${logsDir}...`
+                });
+            });
         }
 
         if(zileExecuted){
@@ -750,7 +766,7 @@ async function ExecuteSubfinder(dir, enumeration, newSubdomainsFile){
         console.log('###############################---Subfinder Started---######################################');
         console.log('############################################################################################');
 
-        shell.exec(`subfinder -dL ${programsFile} -t 65 -timeout 15 -o ${subfinderFile}`);
+        shell.exec(`subfinder -dL ${programsFile} -t 85 -timeout 15 -o ${subfinderFile}`);
 
         if(enumeration){
             shell.exec(`awk 'NR == FNR{ a[$0] = 1;next } !a[$0]' ${allSubdomainsFile} ${subfinderFile} >> ${newSubdomainsFile}`);
@@ -1147,7 +1163,7 @@ async function ExecuteWaybackurls(dir){
 async function ExecuteDirsearch(dir){
     try {
 
-        let syntax = `${dirsearchTool} -L ${dir}Alive.txt -t 70 -w ${dirsearchDict} -e html,js,php,png,jpg,sql,json,xml,htm,css,asp,jsp,aspx,jspx,git -x 404,301,400,500,302,403,401,503 --simple-report=${dir}Dirsearch.txt`;
+        let syntax = `${dirsearchTool} -L ${dir}Alive.txt -t 80 -w ${dirsearchDict} -e html,js,php,png,jpg,sql,json,xml,htm,css,asp,jsp,aspx,jspx,git -x 404,301,400,500,302,403,401,503 --simple-report=${dir}Dirsearch.txt`;
 
         console.log('Executing Dirsearch');
 
@@ -1228,6 +1244,7 @@ async function ExecuteZile(dir){
         let waybackFile = `${dir}Waybacks/Waybackurls.txt`;
         let aliveFile = `${dir}Alive.txt`;
         let zileFile = `${dir}Zile.txt`;
+        let hakrawlerFile = `${dir}Hakrawler.txt`;
 
         if(fs.existsSync(waybackFile)){
             shell.exec(`cat ${waybackFile} >> ${zileFile}`);
@@ -1245,9 +1262,32 @@ async function ExecuteZile(dir){
             shell.exec(`cat ${getJsFile} >> ${zileFile}`);
         }
 
+        if(fs.existsSync(hakrawlerFile)){
+            shell.exec(`cat ${hakrawlerFile} >> ${zileFile}`);
+        }
+
         shell.exec(`sort -u ${zileFile} -o ${zileFile}`);
 
         shell.exec(`cat ${zileFile} | ${zileTool} --request | tee -a ${dir}APIKeys.txt`);
+
+        return true;
+    }
+    catch(err){
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
+    }
+}
+
+async function ExecuteHakrawler(dir){
+    try {
+
+        let syntax = `cat ${allSubdomainsFile} | ${hakrawlerTool} -plain -depth 3 | tee -a ${dir}Hakrawler.txt`;
+
+        console.log('Executing Hakrawler');
+
+        shell.exec(syntax);
+
+        console.log('Hakrawler Finish!');
 
         return true;
     }
