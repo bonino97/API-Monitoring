@@ -438,20 +438,20 @@ const ExecuteMonitoring = async (req,res) => {
                                             });
         }
 
-        if(waybackExecuted){
-            var dirsearchExecuted = await ExecuteDirsearch(todayDir)
-                                            .then(data => {
-                                                return data
-                                            })
-                                            .catch(err => {
-                                                console.log("Break Executing Dirsearch: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing Dirsearch - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(waybackExecuted){
+        //     var dirsearchExecuted = await ExecuteDirsearch(todayDir)
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break Executing Dirsearch: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing Dirsearch - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
         
         // if(dirsearchExecuted){
         //     var arjunExecuted = await ExecuteArjun(todayDir)
@@ -468,7 +468,7 @@ const ExecuteMonitoring = async (req,res) => {
         //                                     });
         // }
 
-        if(dirsearchExecuted){
+        if(waybackExecuted){
 
             var gospiderExecuted = await ExecuteGoSpider(todayDir)
                                             .then(data => {
