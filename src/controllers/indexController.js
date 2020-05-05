@@ -1239,12 +1239,19 @@ async function ExecuteGetJs(dir){
 async function ExecuteZile(dir){
     try {
 
+        const apikeyDir = `${dir}APIKeys/`;
+
+        if(fs.existsSync(dir)){
+            shell.exec(`mkdir ${apikeyDir}`);
+        } 
+
         let getJsFile = `${dir}GetJS.txt`;
         let dirsearchFile = `${dir}Dirsearch.txt`;
         let waybackFile = `${dir}Waybacks/Waybackurls.txt`;
         let aliveFile = `${dir}Alive.txt`;
         let zileFile = `${dir}Zile.txt`;
         let hakrawlerFile = `${dir}Hakrawler.txt`;
+        let apikeysFile = `${apikeyDir}APIKeys.txt`;
 
         if(fs.existsSync(waybackFile)){
             shell.exec(`cat ${waybackFile} >> ${zileFile}`);
@@ -1267,8 +1274,13 @@ async function ExecuteZile(dir){
         }
 
         shell.exec(`sort -u ${zileFile} -o ${zileFile}`);
+        
+        shell.exec(`cat ${zileFile} | ${zileTool} --request | tee -a ${apikeysFile}`);
 
-        shell.exec(`cat ${zileFile} | ${zileTool} --request | tee -a ${dir}APIKeys.txt`);
+        if(fs.existsSync(apikeysFile)){
+            shell.exec(`sort -u ${apikeysFile} -o ${apikeysFile}`);
+            shell.exec(`cat ${apikeysFile} | sort -u | grep "amazon" > ${apikeyDir}AWS-Info.txt`);
+        }
 
         return true;
     }
