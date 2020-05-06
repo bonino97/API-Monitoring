@@ -500,7 +500,7 @@ const ExecuteMonitoring = async (req,res) => {
         }
 
         if(getjsExecuted){
-            var hakrawlerExecuted = await ExecuteHakrawler(todayDir)
+            var hakrawlerExecuted = await ExecuteHakrawler(todayDir, newSubdomainsFile)
                                         .then(data => {
                                             return data
                                         })
@@ -1290,10 +1290,10 @@ async function ExecuteZile(dir){
     }
 }
 
-async function ExecuteHakrawler(dir){
+async function ExecuteHakrawler(dir, newSubdomainsFile){
     try {
 
-        let syntax = `cat ${allSubdomainsFile} | ${hakrawlerTool} -plain -depth 3 | tee -a ${dir}Hakrawler.txt`;
+        let syntax = `cat ${newSubdomainsFile} | ${hakrawlerTool} -plain -depth 3 | tee -a ${dir}Hakrawler.txt`;
 
         console.log('Executing Hakrawler');
 
