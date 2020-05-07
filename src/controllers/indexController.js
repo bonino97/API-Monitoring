@@ -125,7 +125,7 @@ const SubdomainEnumeration = async (req,res) => {
 
     try{
 
-        const todayDir = CreateTodayDir(date);
+        const todayDir = CreateTodayDir();
         const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
         if(allDir){
@@ -237,7 +237,7 @@ const SubdomainEnumeration = async (req,res) => {
 
 const SubdomainTakeover = async (req,res) => {
 
-    const todayDir = CreateTodayDir(date);
+    const todayDir = CreateTodayDir();
     const logsDir = CreateLogs();
 
     try{
@@ -278,7 +278,7 @@ const SubdomainTakeover = async (req,res) => {
 const ExecuteMonitoring = async (req,res) => {
     
     const logsDir = CreateLogs();
-    const todayDir = CreateTodayDir(date);
+    const todayDir = CreateTodayDir();
     const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
     try{
@@ -610,9 +610,11 @@ function CreateLogs(){
     }
 }
 
-function CreateTodayDir(date){
+function CreateTodayDir(){
     try{
+        const date = dateFormat(new Date(), "yyyy-mm-dd");
         let todayDir = `${resultDir}Monitoring-${date}/`;
+        
 
         if( fs.existsSync(resultDir ) ){
             console.log('Results Directory Exists.');
