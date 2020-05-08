@@ -42,6 +42,7 @@ const getjsTool = `${goDir}getJS`;
 const assetfinderTool = `${goDir}assetfinder`;
 const waybackTool = `${goDir}waybackurls`;
 const hakrawlerTool = `${goDir}hakrawler`;
+const gauTool = `${goDir}gau`;
 
 //TOKEN & APIKEYS. 
 const gitToken = `dcef34578292f6c0cd1922d2cd1fa8146755b0ea`;
@@ -509,12 +510,27 @@ const ExecuteMonitoring = async (req,res) => {
                                             fs.appendFileSync(logsDir,err+'\n');
                                             return res.status(400).json({
                                                 ok: false,
-                                                msg: `Break Executing Zile - Review logs in ${logsDir}...`
+                                                msg: `Break Executing Hakrawler - Review logs in ${logsDir}...`
                                             });
                                         });
         }
 
         if(hakrawlerExecuted){
+            var gauExecuted = await ExecuteGau(todayDir, newSubdomainsFile)
+                                .then(data => {
+                                    return data
+                                })
+                                .catch(err => {
+                                    console.log("Break Executing Gau: ", err);
+                                    fs.appendFileSync(logsDir,err+'\n');
+                                    return res.status(400).json({
+                                        ok: false,
+                                        msg: `Break Executing Gau - Review logs in ${logsDir}...`
+                                    });
+                                });
+        }
+
+        if(gauExecuted){
             var zileExecuted = await ExecuteZile(todayDir)
             .then(data => {
                 return data
@@ -1302,6 +1318,25 @@ async function ExecuteHakrawler(dir, newSubdomainsFile){
         shell.exec(syntax);
 
         console.log('Hakrawler Finish!');
+
+        return true;
+    }
+    catch(err){
+        fs.appendFileSync(logsDir,err+'\n');
+        return err;
+    }
+}
+
+async function ExecuteGau(dir, newSubdomainsFile){
+    try {
+
+        let syntax = `cat ${newSubdomainsFile} | ${gauTool} | tee -a ${dir}Gau.txt`;
+
+        console.log('Executing Gau');
+
+        shell.exec(syntax);
+
+        console.log('Gau Finish!');
 
         return true;
     }
