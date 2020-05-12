@@ -1135,7 +1135,7 @@ async function ExecuteJSScanner(dir){
 
 async function ExecuteWaybackurls(dir){
     try {
-        var waybackDir = `${dir}Waybacks/`;
+        var waybackDir = `${dir}Crawled/`;
         var waybackFile = `${waybackDir}Waybackurls.txt`;
         var syntax = `cat ${dir}Alive.txt | ${waybackTool} >> ${waybackFile}`;
 
@@ -1149,23 +1149,147 @@ async function ExecuteWaybackurls(dir){
 
         if(fs.existsSync(waybackFile)){
             shell.exec(`sort -u ${waybackFile} -o ${waybackFile}`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "url=" > ${waybackDir}UrlParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "return_to=" > ${waybackDir}ReturnToParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "dest=" > ${waybackDir}DestParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "data=" > ${waybackDir}DataParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "domain=" > ${waybackDir}DomainParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "site=" > ${waybackDir}SiteParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "dir=" > ${waybackDir}DirParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "document=" > ${waybackDir}DocumentParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "root=" > ${waybackDir}RootParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "path=" > ${waybackDir}PathParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "folder=" > ${waybackDir}FolderParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "port=" > ${waybackDir}PortParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "result=" > ${waybackDir}ResultParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "host=" > ${waybackDir}HostParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "page=" > ${waybackDir}PageParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "file=" > ${waybackDir}FileParams.txt`);
-            shell.exec(`cat ${waybackFile} | sort -u | grep "redirect=" > ${waybackDir}RedirectParams.txt`);
+            
+            shell.exec(`cat ${waybackFile} | grep "forward=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "dest=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "redirect=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "uri=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "path=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "continue=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "url=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "window=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "to=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "out=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "view=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "dir=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "show=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "navigation=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "open=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "domain=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "callback=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "return=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "page=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "feed=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "host=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "site=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "html=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "reference=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "file=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "return_to=" >> ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "fetch=" >> ${waybackDir}OpenRedirectsParams.txt`);
+    
+            shell.exec(`cat ${waybackFile} | grep "select=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "report=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "role=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "update=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "query=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "user=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "name=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "sort=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "where=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "search=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "params=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "process=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "row=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "view=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "table=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "from=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "sel=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "results=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "sleep=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "fetch=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "order=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "keyword=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "column=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "field=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "delete=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "filter=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "alter=" >> ${waybackDir}SQLiParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "create=" >> ${waybackDir}SQLiParams.txt`);
+    
+            shell.exec(`cat ${waybackFile} | grep "file=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "document=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "pg=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "root=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "folder=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "path=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "style=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "pdf=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "template=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "php_path=" >> ${waybackDir}LFIParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "doc=" >> ${waybackDir}LFIParams.txt`);
+    
+            shell.exec(`cat ${waybackFile} | grep "access=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "admin=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "dbg=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "debug=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "edit=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "grant=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "test=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "alter=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "clone=">> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "create=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "delete=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "disable=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "enable=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "exec=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "execute=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "load=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "make=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "modify=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "rename=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "reset=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "shell=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "toggle=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "adm=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "root=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "cfg=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "dest=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "redirect=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "uri=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "path=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "continue=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "url=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "window=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "next=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "data=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "reference=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "site=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "html=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "val=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "validate=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "domain=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "callback=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "return=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "page=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "feed=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "host=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "port=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "to=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "out=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "view=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "dir=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "show=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "navigation=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "open=" >> ${waybackDir}SSRFParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "file=" >> ${waybackDir}SSRFParams.txt`);
+    
+            shell.exec(`cat ${waybackFile} | grep "daemon=" >> ${waybackDir}RCEParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "upload=" >> ${waybackDir}RCEParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "dir=" >> ${waybackDir}RCEParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "execute=" >> ${waybackDir}RCEParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "download=" >> ${waybackDir}RCEParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "log=" >> ${waybackDir}RCEParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "ip=" >> ${waybackDir}RCEParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "cli=" >> ${waybackDir}RCEParams.txt`);
+            shell.exec(`cat ${waybackFile} | grep "cmd=" >> ${waybackDir}RCEParams.txt`);
+    
+            shell.exec(`sort -u ${waybackDir}OpenRedirectsParams.txt -o ${waybackDir}OpenRedirectsParams.txt`);
+            shell.exec(`sort -u ${waybackDir}SQLiParams.txt -o ${waybackDir}SQLiParams.txt`);
+            shell.exec(`sort -u ${waybackDir}LFIParams.txt -o ${waybackDir}LFIParams.txt`);
+            shell.exec(`sort -u ${waybackDir}SSRFParams.txt -o ${waybackDir}SSRFParams.txt`);
+            shell.exec(`sort -u ${waybackDir}RCEParams.txt -o ${waybackDir}RCEParams.txt`);
+
         }
 
         console.log('Waybackurls Finish!');
@@ -1265,10 +1389,10 @@ async function ExecuteZile(dir){
 
         let getJsFile = `${dir}GetJS.txt`;
         let dirsearchFile = `${dir}Dirsearch.txt`;
-        let waybackFile = `${dir}Waybacks/Waybackurls.txt`;
+        let waybackFile = `${dir}Crawled/Waybackurls.txt`;
         let aliveFile = `${dir}Alive.txt`;
         let zileFile = `${dir}Zile.txt`;
-        let hakrawlerFile = `${dir}Hakrawler.txt`;
+        let hakrawlerFile = `${dir}Crawled/Hakrawler.txt`;
         let apikeysFile = `${apikeyDir}APIKeys.txt`;
 
         if(fs.existsSync(waybackFile)){
@@ -1310,12 +1434,162 @@ async function ExecuteZile(dir){
 
 async function ExecuteHakrawler(dir, newSubdomainsFile){
     try {
-
-        let syntax = `cat ${newSubdomainsFile} | ${hakrawlerTool} -plain -depth 3 | tee -a ${dir}Hakrawler.txt`;
+        let hakrawlerDir = `${dir}Crawled/`;
+        let hakrawlerFile = `${hakrawlerDir}Hakrawler.txt`;
+        let syntax = `cat ${newSubdomainsFile} | ${hakrawlerTool} -plain -depth 3 | tee -a ${hakrawlerFile}`;
 
         console.log('Executing Hakrawler');
 
+        if(fs.existsSync(dir)){
+            shell.exec(`mkdir ${hakrawlerDir}`);
+        } 
+
         shell.exec(syntax);
+
+        if(fs.existsSync(hakrawlerFile)){
+            shell.exec(`sort -u ${hakrawlerFile} -o ${hakrawlerFile}`);
+            
+            shell.exec(`cat ${hakrawlerFile} | grep "forward=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "dest=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "redirect=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "uri=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "path=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "continue=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "url=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "window=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "to=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "out=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "view=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "dir=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "show=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "navigation=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "open=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "domain=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "callback=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "return=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "page=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "feed=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "host=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "site=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "html=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "reference=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "file=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "return_to=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "fetch=" >> ${hakrawlerDir}OpenRedirectsParams.txt`);
+    
+            shell.exec(`cat ${hakrawlerFile} | grep "select=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "report=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "role=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "update=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "query=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "user=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "name=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "sort=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "where=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "search=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "params=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "process=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "row=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "view=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "table=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "from=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "sel=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "results=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "sleep=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "fetch=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "order=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "keyword=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "column=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "field=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "delete=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "filter=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "alter=" >> ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "create=" >> ${hakrawlerDir}SQLiParams.txt`);
+    
+            shell.exec(`cat ${hakrawlerFile} | grep "file=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "document=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "pg=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "root=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "folder=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "path=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "style=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "pdf=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "template=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "php_path=" >> ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "doc=" >> ${hakrawlerDir}LFIParams.txt`);
+    
+            shell.exec(`cat ${hakrawlerFile} | grep "access=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "admin=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "dbg=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "debug=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "edit=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "grant=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "test=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "alter=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "clone=">> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "create=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "delete=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "disable=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "enable=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "exec=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "execute=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "load=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "make=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "modify=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "rename=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "reset=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "shell=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "toggle=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "adm=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "root=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "cfg=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "dest=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "redirect=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "uri=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "path=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "continue=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "url=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "window=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "next=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "data=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "reference=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "site=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "html=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "val=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "validate=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "domain=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "callback=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "return=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "page=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "feed=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "host=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "port=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "to=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "out=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "view=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "dir=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "show=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "navigation=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "open=" >> ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "file=" >> ${hakrawlerDir}SSRFParams.txt`);
+    
+            shell.exec(`cat ${hakrawlerFile} | grep "daemon=" >> ${hakrawlerDir}RCEParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "upload=" >> ${hakrawlerDir}RCEParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "dir=" >> ${hakrawlerDir}RCEParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "execute=" >> ${hakrawlerDir}RCEParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "download=" >> ${hakrawlerDir}RCEParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "log=" >> ${hakrawlerDir}RCEParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "ip=" >> ${hakrawlerDir}RCEParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "cli=" >> ${hakrawlerDir}RCEParams.txt`);
+            shell.exec(`cat ${hakrawlerFile} | grep "cmd=" >> ${hakrawlerDir}RCEParams.txt`);
+    
+            shell.exec(`sort -u ${hakrawlerDir}OpenRedirectsParams.txt -o ${hakrawlerDir}OpenRedirectsParams.txt`);
+            shell.exec(`sort -u ${hakrawlerDir}SQLiParams.txt -o ${hakrawlerDir}SQLiParams.txt`);
+            shell.exec(`sort -u ${hakrawlerDir}LFIParams.txt -o ${hakrawlerDir}LFIParams.txt`);
+            shell.exec(`sort -u ${hakrawlerDir}SSRFParams.txt -o ${hakrawlerDir}SSRFParams.txt`);
+            shell.exec(`sort -u ${hakrawlerDir}RCEParams.txt -o ${hakrawlerDir}RCEParams.txt`);
+
+        }
 
         console.log('Hakrawler Finish!');
 
@@ -1329,12 +1603,162 @@ async function ExecuteHakrawler(dir, newSubdomainsFile){
 
 async function ExecuteGau(dir, newSubdomainsFile){
     try {
+        var gauDir = `${dir}Crawled/`;
+        var gauFile = `${gauDir}Gau.txt`;
+        var syntax = `cat ${newSubdomainsFile} | ${gauTool} | tee -a ${gauFile}`;
 
-        let syntax = `cat ${newSubdomainsFile} | ${gauTool} | tee -a ${dir}Gau.txt`;
+        if(fs.existsSync(dir)){
+            shell.exec(`mkdir ${gauDir}`);
+        } 
 
         console.log('Executing Gau');
 
         shell.exec(syntax);
+
+        if(fs.existsSync(gauFile)){
+            shell.exec(`sort -u ${gauFile} -o ${gauFile}`);
+            
+            shell.exec(`cat ${gauFile} | grep "forward=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "dest=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "redirect=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "uri=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "path=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "continue=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "url=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "window=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "to=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "out=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "view=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "dir=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "show=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "navigation=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "open=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "domain=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "callback=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "return=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "page=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "feed=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "host=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "site=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "html=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "reference=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "file=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "return_to=" >> ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "fetch=" >> ${gauDir}OpenRedirectsParams.txt`);
+    
+            shell.exec(`cat ${gauFile} | grep "select=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "report=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "role=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "update=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "query=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "user=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "name=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "sort=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "where=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "search=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "params=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "process=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "row=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "view=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "table=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "from=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "sel=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "results=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "sleep=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "fetch=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "order=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "keyword=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "column=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "field=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "delete=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "filter=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "alter=" >> ${gauDir}SQLiParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "create=" >> ${gauDir}SQLiParams.txt`);
+    
+            shell.exec(`cat ${gauFile} | grep "file=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "document=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "pg=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "root=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "folder=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "path=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "style=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "pdf=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "template=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "php_path=" >> ${gauDir}LFIParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "doc=" >> ${gauDir}LFIParams.txt`);
+    
+            shell.exec(`cat ${gauFile} | grep "access=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "admin=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "dbg=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "debug=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "edit=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "grant=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "test=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "alter=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "clone=">> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "create=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "delete=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "disable=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "enable=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "exec=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "execute=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "load=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "make=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "modify=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "rename=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "reset=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "shell=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "toggle=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "adm=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "root=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "cfg=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "dest=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "redirect=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "uri=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "path=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "continue=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "url=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "window=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "next=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "data=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "reference=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "site=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "html=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "val=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "validate=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "domain=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "callback=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "return=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "page=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "feed=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "host=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "port=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "to=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "out=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "view=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "dir=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "show=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "navigation=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "open=" >> ${gauDir}SSRFParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "file=" >> ${gauDir}SSRFParams.txt`);
+    
+            shell.exec(`cat ${gauFile} | grep "daemon=" >> ${gauDir}RCEParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "upload=" >> ${gauDir}RCEParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "dir=" >> ${gauDir}RCEParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "execute=" >> ${gauDir}RCEParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "download=" >> ${gauDir}RCEParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "log=" >> ${gauDir}RCEParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "ip=" >> ${gauDir}RCEParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "cli=" >> ${gauDir}RCEParams.txt`);
+            shell.exec(`cat ${gauFile} | grep "cmd=" >> ${gauDir}RCEParams.txt`);
+    
+            shell.exec(`sort -u ${gauDir}OpenRedirectsParams.txt -o ${gauDir}OpenRedirectsParams.txt`);
+            shell.exec(`sort -u ${gauDir}SQLiParams.txt -o ${gauDir}SQLiParams.txt`);
+            shell.exec(`sort -u ${gauDir}LFIParams.txt -o ${gauDir}LFIParams.txt`);
+            shell.exec(`sort -u ${gauDir}SSRFParams.txt -o ${gauDir}SSRFParams.txt`);
+            shell.exec(`sort -u ${gauDir}RCEParams.txt -o ${gauDir}RCEParams.txt`);
+
+        }
 
         console.log('Gau Finish!');
 
