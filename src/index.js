@@ -12,7 +12,7 @@ app.use(require('../src/routes/index'));
 var server = app.listen(3001);
 console.log('Server Running on Port 3001...');
 
-server.timeout(70000000);
+server.timeout = 70000000;
 
 db.sync().then( () => {
     console.log('Sequelize DB Connected...');
