@@ -282,51 +282,51 @@ const ExecuteMonitoring = async (req,res) => {
 
     try{
 
-        if(todayDir){
+        // if(todayDir){
 
-            var findomainExecuted = await ExecuteFindomain(todayDir, false, newSubdomainsFile)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break Executing Findomain: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing Findomain - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        //     var findomainExecuted = await ExecuteFindomain(todayDir, false, newSubdomainsFile)
+        //                                     .then (data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch((err)=> {
+        //                                         console.log("Break Executing Findomain: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing Findomain - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
     
-        if(findomainExecuted){
-            var assetfinderExecuted = await ExecuteAssetfinder(todayDir, false, newSubdomainsFile)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break Executing AssetFinder: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing AssetFinder - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(findomainExecuted){
+        //     var assetfinderExecuted = await ExecuteAssetfinder(todayDir, false, newSubdomainsFile)
+        //                                     .then (data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch((err)=> {
+        //                                         console.log("Break Executing AssetFinder: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing AssetFinder - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
 
-        if(assetfinderExecuted){
-            var subfinderExecuted = await ExecuteSubfinder(todayDir, false, newSubdomainsFile)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break Executing Subfinder: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing Subfinder - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(assetfinderExecuted){
+        //     var subfinderExecuted = await ExecuteSubfinder(todayDir, false, newSubdomainsFile)
+        //                                     .then (data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch((err)=> {
+        //                                         console.log("Break Executing Subfinder: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing Subfinder - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
         
         // if(subfinderExecuted){
         //     var gobusterExecuted = await ExecuteGobusterDNS(todayDir, dnsSmallDict, false, newSubdomainsFile)
@@ -343,99 +343,99 @@ const ExecuteMonitoring = async (req,res) => {
         //                                 });
         // }
 
-        if(subfinderExecuted){
+        // if(subfinderExecuted){
 
-            shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
+        //     shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
 
-            var saveNewSubExecuted = await SaveNewSubdomains(newSubdomainsFile)                                            
-                                            .then ( data => { 
-                                                return data 
-                                            })
-                                            .catch( err => { 
-                                                console.log("Break Saving New Subdomains: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Saving New Subdomains - Review logs in ${logsDir}...`
-                                                });
-                                            })
-        }
+        //     var saveNewSubExecuted = await SaveNewSubdomains(newSubdomainsFile)                                            
+        //                                     .then ( data => { 
+        //                                         return data 
+        //                                     })
+        //                                     .catch( err => { 
+        //                                         console.log("Break Saving New Subdomains: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Saving New Subdomains - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     })
+        // }
 
-        if(saveNewSubExecuted){
+        // if(saveNewSubExecuted){
 
-            var httprobeExecuted = await ExecuteHttprobe(todayDir, newSubdomainsFile)
-                                            .then ( data => { 
-                                                return data 
-                                            })
-                                            .catch( err => { 
-                                                console.log("Break Executing Httprobe: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing Httprobe - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        //     var httprobeExecuted = await ExecuteHttprobe(todayDir, newSubdomainsFile)
+        //                                     .then ( data => { 
+        //                                         return data 
+        //                                     })
+        //                                     .catch( err => { 
+        //                                         console.log("Break Executing Httprobe: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing Httprobe - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
 
-        if(httprobeExecuted){
-            var aquatoneExecuted = await ExecuteAquatone(todayDir)
-                                        .then (data => {
-                                            return data
-                                        })
-                                        .catch((err)=> {
-                                            console.log("Break Executing Aquatone: ", err);
-                                            fs.appendFileSync(logsDir,err+'\n');
-                                            return res.status(400).json({
-                                                ok: false,
-                                                msg: `Break Executing Aquatone - Review logs in ${logsDir}...`
-                                            });
-                                        });
-        }
+        // if(httprobeExecuted){
+        //     var aquatoneExecuted = await ExecuteAquatone(todayDir)
+        //                                 .then (data => {
+        //                                     return data
+        //                                 })
+        //                                 .catch((err)=> {
+        //                                     console.log("Break Executing Aquatone: ", err);
+        //                                     fs.appendFileSync(logsDir,err+'\n');
+        //                                     return res.status(400).json({
+        //                                         ok: false,
+        //                                         msg: `Break Executing Aquatone - Review logs in ${logsDir}...`
+        //                                     });
+        //                                 });
+        // }
 
-        if(aquatoneExecuted){
-            var jsscannerExecuted = await ExecuteJSScanner(todayDir)
-                                            .then (data => {
-                                                return data
-                                            })
-                                            .catch((err)=> {
-                                                console.log("Break Executing JSSCanner: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing JSSCanner - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(aquatoneExecuted){
+        //     var jsscannerExecuted = await ExecuteJSScanner(todayDir)
+        //                                     .then (data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch((err)=> {
+        //                                         console.log("Break Executing JSSCanner: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing JSSCanner - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
 
-        if(jsscannerExecuted){
-            var dataConsExecuted = await ExecuteDataConsumer(todayDir)  
-                                            .then(data => {
-                                                return data
-                                            })
-                                            .catch(err => {
-                                                console.log("Break Executing DataConsumer: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing DataConsumer - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(jsscannerExecuted){
+        //     var dataConsExecuted = await ExecuteDataConsumer(todayDir)  
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break Executing DataConsumer: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing DataConsumer - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
 
-        if(dataConsExecuted){
-            var waybackExecuted = await ExecuteWaybackurls(todayDir)
-                                            .then(data => {
-                                                return data
-                                            })
-                                            .catch(err => {
-                                                console.log("Break Executing Waybackurls: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing Waybackurls - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(dataConsExecuted){
+        //     var waybackExecuted = await ExecuteWaybackurls(todayDir)
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break Executing Waybackurls: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing Waybackurls - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
 
         // if(waybackExecuted){
         //     var dirsearchExecuted = await ExecuteDirsearch(todayDir)
@@ -467,51 +467,53 @@ const ExecuteMonitoring = async (req,res) => {
         //                                     });
         // }
 
-        if(waybackExecuted){
+        // if(waybackExecuted){
 
-            var gospiderExecuted = await ExecuteGoSpider(todayDir)
-                                            .then(data => {
-                                                return data
-                                            })
-                                            .catch(err => {
-                                                console.log("Break Executing GoSpider: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing GoSpider - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        //     var gospiderExecuted = await ExecuteGoSpider(todayDir)
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break Executing GoSpider: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing GoSpider - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
 
-        if(gospiderExecuted){
-            var getjsExecuted = await ExecuteGetJs(todayDir)
-                                        .then(data => {
-                                            return data
-                                        })
-                                        .catch(err => {
-                                            console.log("Break Executing GetJS: ", err);
-                                            fs.appendFileSync(logsDir,err+'\n');
-                                            return res.status(400).json({
-                                                ok: false,
-                                                msg: `Break Executing GetJS - Review logs in ${logsDir}...`
-                                            });
-                                        });
-        }
+        // if(gospiderExecuted){
+        //     var getjsExecuted = await ExecuteGetJs(todayDir)
+        //                                 .then(data => {
+        //                                     return data
+        //                                 })
+        //                                 .catch(err => {
+        //                                     console.log("Break Executing GetJS: ", err);
+        //                                     fs.appendFileSync(logsDir,err+'\n');
+        //                                     return res.status(400).json({
+        //                                         ok: false,
+        //                                         msg: `Break Executing GetJS - Review logs in ${logsDir}...`
+        //                                     });
+        //                                 });
+        // }
 
-        if(getjsExecuted){
-            var hakrawlerExecuted = await ExecuteHakrawler(todayDir, newSubdomainsFile)
-                                        .then(data => {
-                                            return data
-                                        })
-                                        .catch(err => {
-                                            console.log("Break Executing Hakrawler: ", err);
-                                            fs.appendFileSync(logsDir,err+'\n');
-                                            return res.status(400).json({
-                                                ok: false,
-                                                msg: `Break Executing Hakrawler - Review logs in ${logsDir}...`
-                                            });
-                                        });
-        }
+        // if(getjsExecuted){
+        //     var hakrawlerExecuted = await ExecuteHakrawler(todayDir, newSubdomainsFile)
+        //                                 .then(data => {
+        //                                     return data
+        //                                 })
+        //                                 .catch(err => {
+        //                                     console.log("Break Executing Hakrawler: ", err);
+        //                                     fs.appendFileSync(logsDir,err+'\n');
+        //                                     return res.status(400).json({
+        //                                         ok: false,
+        //                                         msg: `Break Executing Hakrawler - Review logs in ${logsDir}...`
+        //                                     });
+        //                                 });
+        // }
+
+        let hakrawlerExecuted = true;
 
         if(hakrawlerExecuted){
             var gauExecuted = await ExecuteGau(todayDir, newSubdomainsFile)
@@ -1388,6 +1390,7 @@ async function ExecuteZile(dir){
         let getJsFile = `${dir}GetJS.txt`;
         let dirsearchFile = `${dir}Dirsearch.txt`;
         let waybackFile = `${dir}Crawled/Waybackurls.txt`;
+        let gauFile = `${dir}Crawled/Gau.txt`;
         let aliveFile = `${dir}Alive.txt`;
         let zileFile = `${dir}Zile.txt`;
         let hakrawlerFile = `${dir}Crawled/Hakrawler.txt`;
@@ -1411,6 +1414,10 @@ async function ExecuteZile(dir){
 
         if(fs.existsSync(hakrawlerFile)){
             shell.exec(`cat ${hakrawlerFile} >> ${zileFile}`);
+        }
+
+        if(fs.existsSync(gauFile)){
+            shell.exec(`cat ${gauFile} >> ${zileFile}`);
         }
 
         shell.exec(`sort -u ${zileFile} -o ${zileFile}`);
