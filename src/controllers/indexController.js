@@ -23,7 +23,6 @@ const date = dateFormat(new Date(), "yyyy-mm-dd");
 const resultDir = `../MonitoringResults/`;
 const allDir = CreateAllDir(resultDir);
 
-const logsDir = CreateLogs();
 const allSubdomainsFile = CreateSubdomainsFile(allDir);
 
 const programsFile = `../programs/programs.txt`;
@@ -121,11 +120,10 @@ const Welcome = async(req,res) => {
 };
 
 const SubdomainEnumeration = async (req,res) => {
-    
     const logsDir = CreateLogs();
-
+    
     try{
-
+        
         const todayDir = CreateTodayDir();
         const newSubdomainsFile = `${todayDir}NewSubdomains.txt`;
 
