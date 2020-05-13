@@ -9,8 +9,10 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(require('../src/routes/index'));
 
-app.listen(3001);
+var server = app.listen(3001);
 console.log('Server Running on Port 3001...');
+
+server.setTimeout(70000000);
 
 db.sync().then( () => {
     console.log('Sequelize DB Connected...');
