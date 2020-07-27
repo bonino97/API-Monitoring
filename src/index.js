@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const db = require('./config/db');
+// const db = require('./config/db');
 
 //MIDDLEWARES
 
@@ -12,11 +12,11 @@ app.use(require('../src/routes/index'));
 app.listen(3001);
 console.log('Server Running on Port 3001...');
 
-db.sync().then( () => {
-    console.log('Sequelize DB Connected...');
-}).catch(err => {
-    console.log(err);
-});
+// db.sync().then( () => {
+//     console.log('Sequelize DB Connected...');
+// }).catch(err => {
+//     console.log(err);
+// });
 
 require('./models/Subdomains');
 require('./models/Information');
