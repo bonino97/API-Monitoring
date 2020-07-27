@@ -225,7 +225,7 @@ const SubdomainEnumeration = async (req,res) => {
         }
     }
     catch(err){
-        var logsDir = CreateLogs();
+        logsDir = CreateLogs();
         console.log("Break Executing Subdomain Enumeration: ", err);
         fs.appendFileSync(logsDir,err+'\n');
         return res.status(400).json({
