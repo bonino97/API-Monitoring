@@ -18,6 +18,8 @@ console.log('Server Running on Port 3001...');
 //     console.log(err);
 // });
 
+app.use(express.static('../MonitoringResults'))
+
 require('./models/Subdomains');
 require('./models/Information');
 require('./models/Stacks');
