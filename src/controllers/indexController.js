@@ -343,25 +343,27 @@ const ExecuteMonitoring = async (req,res) => {
                                         });
         }
 
-        if(subfinderExecuted){
+        // if(subfinderExecuted){
+
+        //     shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
+
+        //     var saveNewSubExecuted = await SaveNewSubdomains(newSubdomainsFile)                                            
+        //                                     .then ( data => { 
+        //                                         return data 
+        //                                     })
+        //                                     .catch( err => { 
+        //                                         console.log("Break Saving New Subdomains: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Saving New Subdomains - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     })
+        // }
+
+        if(gobusterExecuted){
 
             shell.exec(`sort -u ${newSubdomainsFile} -o ${newSubdomainsFile}`);
-
-            var saveNewSubExecuted = await SaveNewSubdomains(newSubdomainsFile)                                            
-                                            .then ( data => { 
-                                                return data 
-                                            })
-                                            .catch( err => { 
-                                                console.log("Break Saving New Subdomains: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Saving New Subdomains - Review logs in ${logsDir}...`
-                                                });
-                                            })
-        }
-
-        if(saveNewSubExecuted){
 
             var httprobeExecuted = await ExecuteHttprobe(todayDir, newSubdomainsFile)
                                             .then ( data => { 
@@ -407,22 +409,22 @@ const ExecuteMonitoring = async (req,res) => {
                                             });
         }
 
-        if(jsscannerExecuted){
-            var dataConsExecuted = await ExecuteDataConsumer(todayDir)  
-                                            .then(data => {
-                                                return data
-                                            })
-                                            .catch(err => {
-                                                console.log("Break Executing DataConsumer: ", err);
-                                                fs.appendFileSync(logsDir,err+'\n');
-                                                return res.status(400).json({
-                                                    ok: false,
-                                                    msg: `Break Executing DataConsumer - Review logs in ${logsDir}...`
-                                                });
-                                            });
-        }
+        // if(jsscannerExecuted){
+        //     var dataConsExecuted = await ExecuteDataConsumer(todayDir)  
+        //                                     .then(data => {
+        //                                         return data
+        //                                     })
+        //                                     .catch(err => {
+        //                                         console.log("Break Executing DataConsumer: ", err);
+        //                                         fs.appendFileSync(logsDir,err+'\n');
+        //                                         return res.status(400).json({
+        //                                             ok: false,
+        //                                             msg: `Break Executing DataConsumer - Review logs in ${logsDir}...`
+        //                                         });
+        //                                     });
+        // }
 
-        if(dataConsExecuted){
+        if(jsscannerExecuted){
             var waybackExecuted = await ExecuteWaybackurls(todayDir)
                                             .then(data => {
                                                 return data
